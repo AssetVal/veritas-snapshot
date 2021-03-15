@@ -10,4 +10,13 @@ module.exports = {
     content: ["./src/**/*.svelte"],
     enabled: production,
   },
+  theme: {
+    extend: {
+      colors: {
+        blue: {
+          450: '#105f9e'
+        }
+      }
+    }
+  }
 };

@@ -63,5 +63,8 @@
       "blacklist": [
          "/example/modal/basic/4"
       ]
+   },
+   "dependencies": {
+      "svelte-particles": "^1.3.1"
    }
 }
