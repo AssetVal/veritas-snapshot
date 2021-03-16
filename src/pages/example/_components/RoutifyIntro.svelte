@@ -16,5 +16,5 @@
   class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white mt-4 focus:outline-none"
   on:click={logout}
 >
-  Log Out
+  Log Out {$user.name.first}
 </button>

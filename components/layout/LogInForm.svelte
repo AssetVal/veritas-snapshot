@@ -5,24 +5,35 @@
   let email, password;
 
   async function login(){
-    const response = await fetch('https://www.assetval.club/snapshotLogIn', {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("email", email);
+    urlencoded.append("password", password);
+
+    const response = await fetch('https://www.assetval.club/api/snapshotLogIn', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({email, password})
+      headers: headers,
+      body: urlencoded,
+      redirect: 'follow'
     });
 
     const result = await response.json();
 
-    console.log(result);
+    console.log(result)
 
-    $user = { email, password };
-    console.log($user);
+    if (result.status === 'success'){
+      $user = {name: result.data.user.name};
+      console.log($user);
 
-    /** We want to $goto our current location.
-     *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
-    $goto(window.location.href);
+      /** We want to $goto our current location.
+       *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
+      $goto(window.location.href);
+    } else {
+      console.log('Nope')
+    }
+
   }
 </script>
 
@@ -57,6 +68,7 @@
     <button
       class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-full"
       on:click={login}
+      type="button"
     > Sign In </button>
   </div>
 
