@@ -5,7 +5,6 @@
 </script>
 
 <main class="flex flex-col items-center min-h-full">
-
   {#if $user}
     <!-- routify:options preload="proximity" -->
     <slot />
