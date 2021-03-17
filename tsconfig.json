@@ -1,5 +1,5 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "classes/**/*", "components/**/*", "stores/**/*"],
   "exclude": ["node_modules/*", "api/*", "assets/*"],
 }
