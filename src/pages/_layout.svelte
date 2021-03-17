@@ -1,11 +1,11 @@
 <script>
   import LogInHeader from '../../components/layout/LogInHeader.svelte';
   import LogInForm from '../../components/layout/LogInForm.svelte';
-  import {user} from '../../stores/user';
+ import {vendor} from '../../stores/vendor'
 </script>
 
 <main class="flex flex-col items-center min-h-full">
-  {#if $user}
+  {#if $vendor}
     <!-- routify:options preload="proximity" -->
     <slot />
   {:else}
