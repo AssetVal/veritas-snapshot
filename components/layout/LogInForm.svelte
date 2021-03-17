@@ -1,39 +1,25 @@
 <script>
-  import { user } from '../../stores/user';
+  import { vendor } from '../../stores/vendor';
   import { goto } from '@roxi/routify';
+  import logInToVeritas from '../../src/_modules/logIn';
 
   let email, password;
 
-  async function login(){
-    const headers = new Headers();
-    headers.append("Content-Type", "application/x-www-form-urlencoded");
+  function login(){
+    logInToVeritas(email, password).then(response => {
+      console.log(response)
 
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", email);
-    urlencoded.append("password", password);
+      if (response.status === 'success'){
+        $vendor = {...response.data};
+        console.log($vendor);
 
-    const response = await fetch('https://www.assetval.club/api/snapshotLogIn', {
-      method: 'POST',
-      headers: headers,
-      body: urlencoded,
-      redirect: 'follow'
-    });
-
-    const result = await response.json();
-
-    console.log(result)
-
-    if (result.status === 'success'){
-      $user = {name: result.data.user.name};
-      console.log($user);
-
-      /** We want to $goto our current location.
-       *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
-      $goto(window.location.href);
-    } else {
-      console.log('Nope')
-    }
-
+        /** We want to $goto our current location.
+         *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
+        $goto(window.location.href);
+      } else {
+        console.log('Nope')
+      }
+    })
   }
 </script>
 
@@ -70,6 +56,13 @@
       on:click={login}
       type="button"
     > Sign In </button>
+  </div>
+
+  <div class="text-center pt-4">
+    <a
+      href="https://www.assetval.club/forgot-pass"
+      class="text-blue-primary underline hover:text-blue-750"
+    >Forgot Password?</a>
   </div>
 
 </form>
