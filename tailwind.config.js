@@ -30,7 +30,7 @@ module.exports = {
   purge: {
     content: [
       "./src/**/*.svelte",
-      "./components/**/*svelte"
+      "./components/**/*.svelte"
     ],
     enabled: production,
   },
