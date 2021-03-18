@@ -2,10 +2,11 @@ const production = !process.env.ROLLUP_WATCH;
 
 module.exports = {
   plugins: [
-    require("tailwindcss"),
     require("postcss-import"),
+    require("tailwindcss"),
+    require("autoprefixer"),
     ...(production
-      ? [require("autoprefixer"), require("cssnano")({ preset: "default" })]
+      ? [require('cssnano')({preset: 'default'})]
       : []),
   ],
 };
