@@ -27,6 +27,13 @@ module.exports = {
       addUtilities(utilities, variants('borderColor'));
     },
   ],
+  purge: {
+    content: [
+      "./src/**/*.svelte",
+      "./components/**/*svelte"
+    ],
+    enabled: production,
+  },
   theme: {
     extend: {
       colors: {
