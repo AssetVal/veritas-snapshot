@@ -3,8 +3,10 @@
   import { goto } from '@roxi/routify';
   import logInToVeritas from '../../src/_modules/logIn';
 
+  // Variables
   let email, password;
 
+  // Functions
   function login(){
     logInToVeritas(email, password).then(response => {
       if (response.status === 'success'){
@@ -60,7 +62,7 @@
     <a
       href="https://www.assetval.club/forgot-pass"
       class="text-blue-primary underline hover:text-blue-750"
-    >Forgot Password?</a>
+    > Forgot Password? </a>
   </div>
 
 </form>
