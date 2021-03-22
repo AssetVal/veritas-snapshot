@@ -419,187 +419,189 @@ export class Order implements iOrder {
   public systemComments: Array<SystemOrderComment>;
   public analystComments: Array<AnalystOrderComment>;
   public completedBy: Vendor;
-  constructor(orderData: iOrder){
-    this.changes = 0;
-    this._id = orderData._id;
-    this.APN = orderData.APN;
-    this.inspection = {
-      date: orderData.inspection?.date ?? null,
-      time: orderData.inspection?.time ?? null,
-    };
-    this.supportingDocuments = orderData.supportingDocuments ?? {};
-    this.client = orderData.client ?? null;
-    this.photos = orderData.photos ?? {};
-    this.address = {
-      street: orderData.address?.street ?? null,
-      unitNumber: orderData.address?.unitNumber ?? null,
-      city: orderData.address?.city ?? null,
-      state: orderData.address?.state ?? null,
-      zip: orderData.address?.zip ?? null,
-      location: orderData.address?.location ?? null,
-      locationType: orderData.address?.locationType ?? null,
-      CBSA: orderData.address?.CBSA ?? null,
-      county: orderData.address?.county ?? null,
-      phone: orderData.address?.phone ?? null,
-      phoneExt: orderData.address?.phoneExt ?? null,
-    };
-    this.associationInfo = {
-      name: orderData?.associationInfo?.name ?? null,
-      contact: orderData?.associationInfo?.contact ?? null,
-      phone: orderData?.associationInfo?.phone ?? null,
-      fee: orderData?.associationInfo?.fee ?? null,
-      feeSchedule: orderData?.associationInfo?.feeSchedule ?? null,
-      feesCurrent: orderData?.associationInfo?.feesCurrent ?? null,
-      feesDelinquentBy: orderData?.associationInfo?.feesDelinquentBy ?? null,
-      feeIncludes: orderData?.associationInfo?.feeIncludes ?? null,
-    };
-    this.borrower = orderData?.borrower ?? null;
-    this.loanNumber = orderData?.loanNumber ?? null;
-    this.loanKey = orderData?.loanKey ?? null;
-    this.orderID = orderData?.orderID ?? null;
-    this.notes = orderData?.notes ?? null;
-    this.clientDueDate = orderData?.clientDueDate ?? null;
-    this.vendorDueDate = orderData?.vendorDueDate ?? null;
-    this.batchName = orderData?.batchName ?? null;
-    this.lockBox = orderData?.lockBox ?? null;
-    this.poolDept = orderData?.poolDept ?? null;
-    this.orderedBy = orderData?.orderedBy ?? null;
-    this.tags = orderData?.tags ?? null;
-    this.billing = {
-      vendorFee: orderData?.billing?.vendorFee ?? null,
-      code: orderData?.billing?.code ?? null,
-      ccEmails: orderData?.billing?.ccEmails ?? null,
-    };
-    this.contactInfo = {
-      name: orderData?.contactInfo?.name ?? null,
-      phone: orderData?.contactInfo?.phone ?? null,
-      phoneExt: orderData?.contactInfo?.phoneExt ?? null,
-    };
-    this.owner = {
-      name: orderData?.owner?.name ?? null,
-      phone: orderData?.owner?.phone ?? null,
-      phoneExt: orderData?.owner?.phoneExt ?? null,
-    };
-    this.services = {
-      productType: orderData?.services?.productType ?? null,
-      pdfType: orderData?.services?.pdfType ?? null,
-      rush: orderData?.services?.rush ?? null,
-      AVM: orderData?.services?.AVM ?? null,
-      rentRange: orderData?.services?.rentRange ?? null,
-      adjustment: orderData?.services?.adjustment ?? null,
-      isInterior: orderData?.services?.isInterior ?? null,
-      secondOpinionBPO: orderData?.services?.secondOpinionBPO ?? null,
-      highPriority: orderData?.services?.highPriority ?? null,
-      double: orderData?.services?.double ?? null,
-    };
-    this.props = {
-      attached: orderData?.props?.attached ?? null,
-      bedrooms: orderData?.props?.bedrooms ?? null,
-      bathrooms: {
-        full: orderData?.props?.bathrooms?.full ?? null,
-        partial: orderData?.props?.bathrooms?.partial ?? null,
-      },
-      basement: {
-        basementType: orderData?.props?.basement?.basementType ?? null,
-        percentFinished: orderData?.props?.basement?.percentFinished ?? null,
-        inGLA: orderData?.props?.basement?.inGLA ?? null,
-        sqFt: orderData?.props?.basement?.sqFt ?? null,
-        finishedRooms: orderData?.props?.basement?.finishedRooms ?? null,
-      },
-      bgSqFt: orderData?.props?.bgSqFt ?? null,
-      bgFinRooms: orderData?.props?.bgFinRooms ?? null,
-      commercialUnits: orderData?.props?.commercialUnits ?? null,
-      mixedUseUnits: orderData?.props?.mixedUseUnits ?? null,
-      garage: {
-        type: orderData?.props?.garage?.type ?? null,
-        size: orderData?.props?.garage?.size ?? null,
-        parking: orderData?.props?.garage?.parking ?? null,
-      },
-      lotSize: {
-        total: orderData?.props?.lotSize?.total ?? null,
-        units: orderData?.props?.lotSize?.units ?? null,
-      },
-      belongsToAssociation: orderData?.props?.belongsToAssociation ?? null,
-      GLA: orderData?.props?.GLA ?? null,
-      yearBuilt: orderData?.props?.yearBuilt ?? null,
-      propertyType: orderData?.props?.propertyType ?? null,
-      style: orderData?.props?.style ?? null,
-      construction: orderData?.props?.construction ?? null,
-      view: orderData?.props?.view ?? null,
-      waterfront: orderData?.props?.waterfront ?? null,
-      pool: orderData?.props?.pool ?? null,
-      fireplaces: orderData?.props?.fireplaces ?? null,
-      gated: orderData?.props?.gated ?? null,
-      wasteDisposal: orderData?.props?.wasteDisposal ?? null,
-      waterSource: orderData?.props?.waterSource ?? null,
-      infoSource: orderData?.props?.infoSource ?? null,
-      APN: orderData?.props?.APN ?? null,
-    };
-    this.history = {
-      lastSaleDate: orderData?.history?.lastSaleDate ?? null,
-      lastSalePrice: orderData?.history?.lastSalePrice ?? null,
-      taxValue: orderData?.history?.taxValue ?? null,
-      taxesCurrent: orderData?.history?.taxesCurrent ?? null,
-    };
-    this.fetchLink = '/wizard/autosave';
-    this.propertyLocation = {
-      locationType: orderData?.propertyLocation?.locationType ?? null,
-      coordinates: orderData?.propertyLocation?.coordinates ?? null,
-      geo: {
-        long: orderData?.propertyLocation?.geo?.long ?? null,
-        lat: orderData?.propertyLocation?.geo?.lat ?? null,
-      },
-    };
-    this.DNA = {
-      APN: orderData?.DNA?.APN ?? null,
-      propertyType: orderData?.DNA?.propertyType ?? null,
-      GLA: orderData?.DNA?.GLA ?? null,
-      bed: orderData?.DNA?.bed ?? null,
-      fullBath: orderData?.DNA?.fullBath ?? null,
-      partialBath: orderData?.DNA?.partialBath ?? null,
-      yearBuilt: orderData?.DNA?.yearBuilt ?? null,
-      lotSize: {
-        total: orderData?.DNA?.lotSize?.total ?? null,
-        units: orderData?.DNA?.lotSize?.units ?? null,
-      },
-      sqFt: orderData?.DNA?.sqFt ?? null,
-      infoSource: orderData?.DNA?.infoSource ?? null,
-      coordinates: orderData?.DNA?.coordinates ?? null,
-      geo: {
-        long: orderData?.DNA?.geo?.long ?? null,
-        lat: orderData?.DNA?.geo?.lat ?? null,
-      },
-    };
-    this.zoning = {
-      zoningCode: orderData?.zoning?.zoningCode ?? null,
-      zoningDesc: orderData?.zoning?.zoningDesc ?? null,
-      zoningCompliance: orderData?.zoning?.zoningCompliance ?? null,
-      zoningUse: orderData?.zoning?.zoningUse ?? null,
-      zoningBestUse: orderData?.zoning?.zoningBestUse ?? null,
-      nonconformingExplanation: orderData?.zoning?.nonconformingExplanation ?? null,
-      illegalExplanation: orderData?.zoning?.illegalExplanation ?? null,
-      bestUseExplanation: orderData?.zoning?.bestUseExplanation,
-    };
-    this.listingInfo = {
-      currentlyListed: orderData?.listingInfo?.currentlyListed ?? null,
-      listedInLastThirtySixMonths: orderData?.listingInfo?.listedInLastThirtySixMonths ?? null,
-      status: orderData?.listingInfo?.status ?? null,
-      listingCompany: orderData?.listingInfo?.listingCompany ?? null,
-      listingBroker: orderData?.listingInfo?.listingBroker ?? null,
-      phone: orderData?.listingInfo?.phone ?? null,
-      daysOnMarket: orderData?.listingInfo?.daysOnMarket ?? null,
-      listDate: orderData?.listingInfo?.listDate ?? null,
-      originalListPrice: orderData?.listingInfo?.originalListPrice ?? null,
-      currentListPrice: orderData?.listingInfo?.currentListPrice,
-    };
-    this.QA_processor = orderData?.QA_processor ?? null;
-    this.BPO_manager = orderData?.BPO_manager ?? null;
-    this.metrics = {
-      extensionRequested: orderData?.metrics?.extensionRequested ?? null,
-    };
-    this.statusHistory = orderData?.statusHistory ?? null;
-    this.added = orderData?.added ?? null;
-    this.savedAt = orderData?.savedAt ?? null;
+  constructor(orderData: iOrder = null){
+    if (orderData) {
+      this.changes = 0;
+      this._id = orderData._id;
+      this.APN = orderData.APN;
+      this.inspection = {
+        date: orderData.inspection?.date ?? null,
+        time: orderData.inspection?.time ?? null,
+      };
+      this.supportingDocuments = orderData.supportingDocuments ?? {};
+      this.client = orderData.client ?? null;
+      this.photos = orderData.photos ?? {};
+      this.address = {
+        street: orderData.address?.street ?? null,
+        unitNumber: orderData.address?.unitNumber ?? null,
+        city: orderData.address?.city ?? null,
+        state: orderData.address?.state ?? null,
+        zip: orderData.address?.zip ?? null,
+        location: orderData.address?.location ?? null,
+        locationType: orderData.address?.locationType ?? null,
+        CBSA: orderData.address?.CBSA ?? null,
+        county: orderData.address?.county ?? null,
+        phone: orderData.address?.phone ?? null,
+        phoneExt: orderData.address?.phoneExt ?? null,
+      };
+      this.associationInfo = {
+        name: orderData?.associationInfo?.name ?? null,
+        contact: orderData?.associationInfo?.contact ?? null,
+        phone: orderData?.associationInfo?.phone ?? null,
+        fee: orderData?.associationInfo?.fee ?? null,
+        feeSchedule: orderData?.associationInfo?.feeSchedule ?? null,
+        feesCurrent: orderData?.associationInfo?.feesCurrent ?? null,
+        feesDelinquentBy: orderData?.associationInfo?.feesDelinquentBy ?? null,
+        feeIncludes: orderData?.associationInfo?.feeIncludes ?? null,
+      };
+      this.borrower = orderData?.borrower ?? null;
+      this.loanNumber = orderData?.loanNumber ?? null;
+      this.loanKey = orderData?.loanKey ?? null;
+      this.orderID = orderData?.orderID ?? null;
+      this.notes = orderData?.notes ?? null;
+      this.clientDueDate = orderData?.clientDueDate ?? null;
+      this.vendorDueDate = orderData?.vendorDueDate ?? null;
+      this.batchName = orderData?.batchName ?? null;
+      this.lockBox = orderData?.lockBox ?? null;
+      this.poolDept = orderData?.poolDept ?? null;
+      this.orderedBy = orderData?.orderedBy ?? null;
+      this.tags = orderData?.tags ?? null;
+      this.billing = {
+        vendorFee: orderData?.billing?.vendorFee ?? null,
+        code: orderData?.billing?.code ?? null,
+        ccEmails: orderData?.billing?.ccEmails ?? null,
+      };
+      this.contactInfo = {
+        name: orderData?.contactInfo?.name ?? null,
+        phone: orderData?.contactInfo?.phone ?? null,
+        phoneExt: orderData?.contactInfo?.phoneExt ?? null,
+      };
+      this.owner = {
+        name: orderData?.owner?.name ?? null,
+        phone: orderData?.owner?.phone ?? null,
+        phoneExt: orderData?.owner?.phoneExt ?? null,
+      };
+      this.services = {
+        productType: orderData?.services?.productType ?? null,
+        pdfType: orderData?.services?.pdfType ?? null,
+        rush: orderData?.services?.rush ?? null,
+        AVM: orderData?.services?.AVM ?? null,
+        rentRange: orderData?.services?.rentRange ?? null,
+        adjustment: orderData?.services?.adjustment ?? null,
+        isInterior: orderData?.services?.isInterior ?? null,
+        secondOpinionBPO: orderData?.services?.secondOpinionBPO ?? null,
+        highPriority: orderData?.services?.highPriority ?? null,
+        double: orderData?.services?.double ?? null,
+      };
+      this.props = {
+        attached: orderData?.props?.attached ?? null,
+        bedrooms: orderData?.props?.bedrooms ?? null,
+        bathrooms: {
+          full: orderData?.props?.bathrooms?.full ?? null,
+          partial: orderData?.props?.bathrooms?.partial ?? null,
+        },
+        basement: {
+          basementType: orderData?.props?.basement?.basementType ?? null,
+          percentFinished: orderData?.props?.basement?.percentFinished ?? null,
+          inGLA: orderData?.props?.basement?.inGLA ?? null,
+          sqFt: orderData?.props?.basement?.sqFt ?? null,
+          finishedRooms: orderData?.props?.basement?.finishedRooms ?? null,
+        },
+        bgSqFt: orderData?.props?.bgSqFt ?? null,
+        bgFinRooms: orderData?.props?.bgFinRooms ?? null,
+        commercialUnits: orderData?.props?.commercialUnits ?? null,
+        mixedUseUnits: orderData?.props?.mixedUseUnits ?? null,
+        garage: {
+          type: orderData?.props?.garage?.type ?? null,
+          size: orderData?.props?.garage?.size ?? null,
+          parking: orderData?.props?.garage?.parking ?? null,
+        },
+        lotSize: {
+          total: orderData?.props?.lotSize?.total ?? null,
+          units: orderData?.props?.lotSize?.units ?? null,
+        },
+        belongsToAssociation: orderData?.props?.belongsToAssociation ?? null,
+        GLA: orderData?.props?.GLA ?? null,
+        yearBuilt: orderData?.props?.yearBuilt ?? null,
+        propertyType: orderData?.props?.propertyType ?? null,
+        style: orderData?.props?.style ?? null,
+        construction: orderData?.props?.construction ?? null,
+        view: orderData?.props?.view ?? null,
+        waterfront: orderData?.props?.waterfront ?? null,
+        pool: orderData?.props?.pool ?? null,
+        fireplaces: orderData?.props?.fireplaces ?? null,
+        gated: orderData?.props?.gated ?? null,
+        wasteDisposal: orderData?.props?.wasteDisposal ?? null,
+        waterSource: orderData?.props?.waterSource ?? null,
+        infoSource: orderData?.props?.infoSource ?? null,
+        APN: orderData?.props?.APN ?? null,
+      };
+      this.history = {
+        lastSaleDate: orderData?.history?.lastSaleDate ?? null,
+        lastSalePrice: orderData?.history?.lastSalePrice ?? null,
+        taxValue: orderData?.history?.taxValue ?? null,
+        taxesCurrent: orderData?.history?.taxesCurrent ?? null,
+      };
+      this.fetchLink = '/wizard/autosave';
+      this.propertyLocation = {
+        locationType: orderData?.propertyLocation?.locationType ?? null,
+        coordinates: orderData?.propertyLocation?.coordinates ?? null,
+        geo: {
+          long: orderData?.propertyLocation?.geo?.long ?? null,
+          lat: orderData?.propertyLocation?.geo?.lat ?? null,
+        },
+      };
+      this.DNA = {
+        APN: orderData?.DNA?.APN ?? null,
+        propertyType: orderData?.DNA?.propertyType ?? null,
+        GLA: orderData?.DNA?.GLA ?? null,
+        bed: orderData?.DNA?.bed ?? null,
+        fullBath: orderData?.DNA?.fullBath ?? null,
+        partialBath: orderData?.DNA?.partialBath ?? null,
+        yearBuilt: orderData?.DNA?.yearBuilt ?? null,
+        lotSize: {
+          total: orderData?.DNA?.lotSize?.total ?? null,
+          units: orderData?.DNA?.lotSize?.units ?? null,
+        },
+        sqFt: orderData?.DNA?.sqFt ?? null,
+        infoSource: orderData?.DNA?.infoSource ?? null,
+        coordinates: orderData?.DNA?.coordinates ?? null,
+        geo: {
+          long: orderData?.DNA?.geo?.long ?? null,
+          lat: orderData?.DNA?.geo?.lat ?? null,
+        },
+      };
+      this.zoning = {
+        zoningCode: orderData?.zoning?.zoningCode ?? null,
+        zoningDesc: orderData?.zoning?.zoningDesc ?? null,
+        zoningCompliance: orderData?.zoning?.zoningCompliance ?? null,
+        zoningUse: orderData?.zoning?.zoningUse ?? null,
+        zoningBestUse: orderData?.zoning?.zoningBestUse ?? null,
+        nonconformingExplanation: orderData?.zoning?.nonconformingExplanation ?? null,
+        illegalExplanation: orderData?.zoning?.illegalExplanation ?? null,
+        bestUseExplanation: orderData?.zoning?.bestUseExplanation,
+      };
+      this.listingInfo = {
+        currentlyListed: orderData?.listingInfo?.currentlyListed ?? null,
+        listedInLastThirtySixMonths: orderData?.listingInfo?.listedInLastThirtySixMonths ?? null,
+        status: orderData?.listingInfo?.status ?? null,
+        listingCompany: orderData?.listingInfo?.listingCompany ?? null,
+        listingBroker: orderData?.listingInfo?.listingBroker ?? null,
+        phone: orderData?.listingInfo?.phone ?? null,
+        daysOnMarket: orderData?.listingInfo?.daysOnMarket ?? null,
+        listDate: orderData?.listingInfo?.listDate ?? null,
+        originalListPrice: orderData?.listingInfo?.originalListPrice ?? null,
+        currentListPrice: orderData?.listingInfo?.currentListPrice,
+      };
+      this.QA_processor = orderData?.QA_processor ?? null;
+      this.BPO_manager = orderData?.BPO_manager ?? null;
+      this.metrics = {
+        extensionRequested: orderData?.metrics?.extensionRequested ?? null,
+      };
+      this.statusHistory = orderData?.statusHistory ?? null;
+      this.added = orderData?.added ?? null;
+      this.savedAt = orderData?.savedAt ?? null;
+    }
   }
 }
 
