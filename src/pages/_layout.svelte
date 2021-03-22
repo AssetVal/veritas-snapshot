@@ -1,16 +1,13 @@
 <script>
-  import LogInHeader from '../../components/layout/LogInHeader.svelte';
-  import LogInForm from '../../components/layout/LogInForm.svelte';
- import {vendor} from '../../stores/vendor'
+  import { vendor } from '../../stores/vendor'
+  import { goto } from '@roxi/routify';
+
+  $: if (!$vendor) $goto("./login", {}, true);
 </script>
 
-<main class="flex flex-col items-center min-h-full">
-  {#if $vendor}
+{#if $vendor}
+  <main class="flex flex-col items-center min-h-full">
     <!-- routify:options preload="proximity" -->
-    <slot />
-  {:else}
-    <LogInHeader/>
-    <LogInForm />
-  {/if}
-</main>
-
+    <slot/>
+  </main>
+{/if}
