@@ -31,8 +31,6 @@ export default async function logInToVeritas(email: string, password: string): P
       redirect: 'follow'
     });
 
-    const result = await response.json();
-
-    return result;
+    return await response.json();
   } catch (err) { console.error(err); }
 }
