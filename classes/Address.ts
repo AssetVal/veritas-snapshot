@@ -2,6 +2,24 @@ type Longitude = number;
 type Latitude = number;
 type Location = [Longitude, Latitude];
 
+/**
+ * ```typescript
+ * {
+  street: string,
+  unitNumber?: string,
+  city: string,
+  state: string,
+  zip: string,
+  location?: {
+    coordinates: Location
+  }
+  CBSA?: string,
+  county?: string,
+  phone?: string,
+  phoneExt?: string,
+}
+ ```
+ */
 interface iAddress {
   street: string,
   unitNumber?: string,
