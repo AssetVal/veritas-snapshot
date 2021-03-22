@@ -12,7 +12,18 @@
   }
 </script>
 
-<h1>Welcome Home</h1>
+<h1>Welcome Back</h1>
+
+{#if $vendor.orders.inProgress.length > 0}
+  {#each $vendor.orders.inProgress as order}
+    <div>
+      {order.address.street}
+    </div>
+  {/each}
+{:else}
+  No orders in progress
+{/if}
+
 <button
   class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white mt-4 focus:outline-none"
   on:click={logout}>
