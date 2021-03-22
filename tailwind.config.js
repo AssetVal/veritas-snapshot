@@ -1,3 +1,4 @@
+const colors = require('tailwindcss/colors')
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,11 +38,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        coolGray: colors.coolGray,
         black: {
           plum: '#323248',
         },
         blue: {
           primary: '#105f9e',
+          'primary-dark': '#1a3e5b',
           450: '#105f9e',
           550: '#1b5f9e',
           650: '#2b5a92',
