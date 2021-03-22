@@ -7,8 +7,6 @@
 
   function login(){
     logInToVeritas(email, password).then(response => {
-      console.log(response)
-
       if (response.status === 'success'){
         $vendor = {...response.data};
         console.log($vendor);
