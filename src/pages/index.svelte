@@ -6,7 +6,7 @@
   import ChooseOrderHeader from '../_components/chooseOrder/ChooseOrderHeader.svelte';
 
   async function logout() {
-    $vendor = false;
+    $vendor = null;
     /** We want to $goto our current location.
      *  Since we're now logged in, we shouldn't be redirected to this login page again.  **/
     $goto(window.location.href);
