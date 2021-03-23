@@ -31,7 +31,6 @@
     top: .75rem;
     right: -3rem;
     justify-content: center;
-    padding: .5rem .5rem;
     cursor: pointer;
     height: 2.25rem;
     width: 2.25rem;
@@ -42,23 +41,66 @@
     background-color: transparent;
     border: 0;
     border-radius: .25rem;
-    margin: 0;
     overflow: visible;
     outline: 0;
   }
 
-  .show {
-    display: block;
+  .show { display: block; }
+
+  .account-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .7;
+    transition: transform 200ms ease-in-out;
+  }
+  .caret-icon {
+    font-size: 1.3333333333em;
+    line-height: .75em;
+    vertical-align: -.225em;
+    width: .625em;
+    overflow: visible;
   }
 </style>
 
 <header class="sidebar-header">
   <button class={classes} on:click={() => sidebarOpen = false}>
-    X
+    <span class="text-white font-semibold text-3xl -ml-4">X</span>
   </button>
-  <button class="p-4 w-full justify-start border-none items-center">
-    <span class="mr-3 w-12 h-12 text-5xl relative inline-block align-middle">
-      <img class="rounded-full" alt="User Avatar" src="https://s3.us-west-1.amazonaws.com/veritasprofile/5debc2253a55a56914d37edf-profile.webp">
+  <button class="p-4 w-full flex flex-row border-none items-center md:hidden lg:hidden xl:hidden">
+      <span class="mr-3 w-12 h-12 text-5xl relative inline-block align-middle">
+        {#if $vendor.user.imgDef}
+          <img class="rounded-full" alt="User Avatar" src="https://s3.us-west-1.amazonaws.com/veritasprofile/{$vendor.user._id}-profile.webp">
+        {/if}
+      </span>
+    <span class="account-icon">
+      <svg
+          class="caret-icon"
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fa"
+          data-icon="caret-down"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          data-fa-i2svg=""
+        >
+          <path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path>
+        </svg>
+    </span>
+    <span class="mr-3 block text-left flex-1 overflow-hidden overflow-clip">
+      <span class="text-lg block overflow-hidden overflow-ellipsis whitespace-nowrap text-semibold">
+        {$vendor.user.name.nickname} {$vendor.user.name.last}
+      </span>
+      <span class="text-xs block overflow-hidden overflow-ellipsis whitespace-nowrap">
+        {$vendor.user.desc}
+      </span>
     </span>
   </button>
+  <div class="dropdown-aside collapsed">
+    <div class="pb-3">
+
+    </div>
+  </div>
 </header>
