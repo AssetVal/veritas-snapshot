@@ -9,7 +9,7 @@ import type Vendor from '../../classes/Vendor';
  * |----|----|
  * | data | {@link Vendor} |
  */
-interface logInResult {
+export interface logInResult {
   status: 'success' | 'failure' | 'error'
   message: string,
   data?: Vendor
