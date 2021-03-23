@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SidebarHeader from './SidebarHeader.svelte';
   export let open = false;
   let classes;
 
@@ -34,5 +35,7 @@
 </style>
 
 <aside class={classes}>
-
+  <div class="flex flex-col h-full">
+    <SidebarHeader bind:sidebarOpen={open}/>
+  </div>
 </aside>
