@@ -2,8 +2,8 @@
    "name": "svelte-app",
    "version": "1.0.0",
    "engines": {
-      "node": "15.10.0",
-      "npm": "7.5.6"
+      "node": "15.12.0",
+      "npm": "7.6.3"
    },
    "@comments scripts": {
       "dev": "develop with blazing fast rebuilds",
@@ -30,7 +30,7 @@
    },
    "devDependencies": {
       "@rollup/plugin-commonjs": "^15.0.0",
-      "@rollup/plugin-node-resolve": "^10.0.0",
+      "@rollup/plugin-node-resolve": "^11.2.0",
       "@rollup/plugin-typescript": "^6.0.0",
       "@roxi/routify": "^2.12.4",
       "@tsconfig/svelte": "^1.0.0",
