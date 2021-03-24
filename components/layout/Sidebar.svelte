@@ -1,14 +1,30 @@
 <script lang="ts">
   import SidebarHeader from './SidebarHeader.svelte';
-  import { goto } from '@roxi/routify';
+  import {goto, isActive} from '@roxi/routify';
+  import {vendor} from '../../stores/vendor';
+  import HomeIcon from '../icons/HomeIcon.svelte';
+  import CogIcon from '../icons/CogIcon.svelte';
+  import LogOutIcon from '../icons/LogOutIcon.svelte';
+
   export let open = false;
   let classes;
 
   $: (open) ? (classes = 'sidebar show') : (classes = 'sidebar')
 
-  function goHome(){
+  // Functions
+  function goHome() {
     open = false;
     $goto('../', {}, true)
+  }
+
+  function logout() {
+    $vendor = null;
+    $goto(window.location.href);
+  }
+
+  function goToSettings() {
+    open = false;
+    $goto("./settings", {}, true);
   }
 </script>
 
@@ -19,8 +35,7 @@
     bottom: 0;
     left: 0;
     padding: 0;
-    width: calc(100vw - 3.5rem);
-    max-width: calc(15rem + 1.5rem);
+    width: 100vw;
     z-index: 1050;
     transform: translate3d(-100%, 0, 0);
     backface-visibility: hidden;
@@ -29,8 +44,11 @@
     background-color: #ececec;
   }
 
-  .sidebar.show {
-    transform: translate3d(0, 0, 0);
+  .sidebar.show { transform: translate3d(0, 0, 0); }
+
+  .active {
+    font-weight: bold;
+    stroke-width: 4;
   }
 </style>
 
@@ -40,10 +58,25 @@
     <div class="flex-1 relative overflow-hidden">
       <nav class="pt-4 pb-1 mb-4 w-full bg-transparent">
         <ul class="block list-none">
-          <li on:click={goHome}>
-            <span class="pr-6 pl-4 py-2 overflow-hidden text-lg">
-              Home
-            </span>
+          <li on:click={goHome} class="cursor-pointer flex flex-row d-item {$isActive('./index', true) ? 'active' : ''}" >
+            <div class="flex items-center pl-3 pr-2">
+              <HomeIcon />
+            </div>
+            <span class="py-2 overflow-hidden text-lg"> Home </span>
+          </li>
+
+          <li on:click={goToSettings} class="cursor-pointer flex flex-row d-item {$isActive('./settings', true) ? 'active' : ''}">
+            <div class="flex items-center pl-3 pr-2">
+              <CogIcon />
+            </div>
+            <span class="py-2 overflow-hidden text-lg"> Settings </span>
+          </li>
+
+          <li on:click={logout} class="cursor-pointer flex flex-row d-item">
+            <div class="flex items-center pl-3 pr-2">
+              <LogOutIcon />
+            </div>
+            <span class="py-2 overflow-hidden text-lg"> Logout </span>
           </li>
         </ul>
       </nav>
