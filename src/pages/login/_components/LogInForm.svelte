@@ -25,6 +25,24 @@
 
 <style>
   .mw-420 { min-width: 420px; }
+
+  label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: calc(.75rem / 3) .75rem;
+    width: 100%;
+    margin-bottom: 0;
+    line-height: 1.5;
+    text-align: left;
+    font-size: .75rem;
+    color: #888c9b;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+    pointer-events: none;
+  }
 </style>
 
 <form class="pt-12 px-8 pb-4 rounded bg-white shadow relative mw-420">
