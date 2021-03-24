@@ -1,6 +1,7 @@
 <script lang="ts">
   import Card from '../layout/Card.svelte';
   import Order from '../../../classes/Order';
+  import encodeGoogleURL from '../../_modules/encodeGoogleURL';
 
   // Props
   export let order = new Order();
@@ -13,6 +14,10 @@
   // Functions
   function openOrder(){
     console.log('CLICKED =>', order._id);
+  }
+
+  function openDirections(){
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeGoogleURL(`${street} ${order.address.city} ${order.address.state}`)}`)
   }
 </script>
 
@@ -64,8 +69,8 @@
     <button class="footer-item" type="button" on:click={openOrder}>
       Open
     </button>
-    <a class="footer-item">
+    <button class="footer-item" type="button" on:click={openDirections}>
       Directions
-    </a>
+    </button>
   </div>
 </Card>
