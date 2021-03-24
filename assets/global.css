@@ -49,7 +49,6 @@ label {
   padding: calc(.75rem / 3) 0;
   width: 100%;
   line-height: 1.5;
-  font-size: .75rem;
   color: #888c9b;
   transition: all .1s ease-in-out;
   pointer-events: none;
