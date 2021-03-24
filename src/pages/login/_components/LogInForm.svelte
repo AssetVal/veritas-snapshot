@@ -1,7 +1,7 @@
 <script>
-  import { vendor } from '../../stores/vendor';
+  import { vendor } from '../../../../stores/vendor';
   import { goto } from '@roxi/routify';
-  import logInToVeritas from '../../src/_modules/logIn';
+  import logInToVeritas from '../../../_modules/logIn';
 
   // Variables
   let email, password;
