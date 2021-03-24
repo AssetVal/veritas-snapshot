@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { vendor } from '../../../stores/vendor';
   import Card from '../layout/Card.svelte';
   import Order from '../../../classes/Order';
   import encodeGoogleURL from '../../_modules/encodeGoogleURL';
@@ -17,7 +18,11 @@
   }
 
   function openDirections(){
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeGoogleURL(`${street} ${order.address.city} ${order.address.state}`)}`)
+    if ($vendor?.preferredMapApp === 'Waze'){
+      window.open(`https://waze.com/ul?q=${encodeURI(`${street} ${order.address.city} ${order.address.state}`)}`)
+    } else {
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeGoogleURL(`${street} ${order.address.city} ${order.address.state}`)}`)
+    }
   }
 </script>
 
