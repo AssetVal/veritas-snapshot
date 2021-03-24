@@ -2,10 +2,13 @@
   import {vendor} from '../../stores/vendor';
   import ChooseOrderCard from '../_components/chooseOrder/ChooseOrderCard.svelte';
   import Card from '../_components/layout/Card.svelte';
-  import ChooseOrderHeader from '../_components/chooseOrder/ChooseOrderHeader.svelte';
+  import SubHeading from '../../components/layout/SubHeading.svelte';
 </script>
 
-<ChooseOrderHeader totalOrders={$vendor.orders.inProgress.length}/>
+<SubHeading>
+  Orders
+  <small class="text-base text-coolGray-400 text-center">{$vendor.orders.inProgress.length} Total</small>
+</SubHeading>
 
 <div class="h-full relative flex flex-wrap -mx-2.5">
   {#if $vendor.orders.inProgress.length > 0}
