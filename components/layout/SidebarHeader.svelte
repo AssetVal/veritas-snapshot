@@ -1,7 +1,6 @@
 <script>
   import {vendor} from '../../stores/vendor';
-  import Caret from '../icons/Caret.svelte';
-  import {goto} from '@roxi/routify';
+  import { goto } from '@roxi/routify';
   // Props
   export let sidebarOpen = false;
 
@@ -21,6 +20,12 @@
   function logout() {
     $vendor = null;
     $goto(window.location.href);
+  }
+
+  function goToSettings(){
+    subDropdownOpen = false;
+    sidebarOpen = false;
+    $goto("./settings", {}, true);
   }
 </script>
 
@@ -99,9 +104,7 @@
     top: 39%
   }
 
-  .collapse:not(.show) {
-    display: none;
-  }
+  .collapse:not(.show) { display: none; }
 
   .description {
     font-size: .875em;
@@ -122,7 +125,7 @@
     <span class="text-white text-3xl -mx-4">X</span>
   </button>
   <button
-    class="p-4 w-full flex flex-row border-none items-center btn-account md:hidden lg:hidden xl:hidden focus:outline-none"
+    class="p-4 w-full flex flex-row border-none items-center btn-account focus:outline-none"
     type="button"
     aria-expanded={subDropdownOpen}
     on:click={() => (subDropdownOpen) ? (subDropdownOpen = false) : (subDropdownOpen = true)}
@@ -133,17 +136,7 @@
       {/if}
     </span>
     <span class="account-icon">
-      <svg
-        class="caret-icon"
-        aria-hidden="true"
-        focusable="false"
-        data-prefix="fa"
-        data-icon="caret-down"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 320 512"
-        data-fa-i2svg=""
-      >
+      <svg class="caret-icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path>
       </svg>
     </span>
@@ -158,7 +151,7 @@
   </button>
   <div class={expandClass}>
     <div class="pb-3">
-      <a href="#" class="block w-full px-4 py-2 d-item">Settings</a>
+      <button class="block w-full px-4 py-2 d-item text-left focus:outline-none" on:click={goToSettings}>Settings</button>
       <button class="block w-full px-4 py-2 d-item -mb-3 text-left focus:outline-none" on:click={logout}>Logout</button>
     </div>
   </div>
