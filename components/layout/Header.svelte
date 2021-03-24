@@ -1,6 +1,6 @@
 <script>
   import Logo from './Logo.svelte';
-  import Hamburger from './Hamburger.svelte';
+  import Hamburger from '../icons/Hamburger.svelte';
 
   export let sidebar = false;
 </script>
