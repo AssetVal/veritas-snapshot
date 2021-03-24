@@ -29,24 +29,31 @@ input {
   transition: border-bottom-color .05s linear, border-bottom-width .05s linear;
 }
 
+select {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg width='14' height='14' fill='%23888c9b' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19L403 749q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z'/%3E%3C/svg%3E") no-repeat right .75rem center,linear-gradient(180deg,#fff,#f6f7f9);
+  backface-visibility: hidden;
+  transition: all .2s ease-in-out;
+  height: 2.75rem;
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  appearance: none;
+}
+
+.select {
+  padding: .375rem 1.75rem .375rem .75rem;
+}
+
 label {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: calc(.75rem / 3) .75rem;
+  padding: calc(.75rem / 3) 0;
   width: 100%;
-  margin-bottom: 0;
   line-height: 1.5;
-  text-align: left;
   font-size: .75rem;
   color: #888c9b;
-  border: 1px solid transparent;
-  border-radius: .25rem;
   transition: all .1s ease-in-out;
   pointer-events: none;
 }
-
 
 .d-item { color: #15152d; }
 
