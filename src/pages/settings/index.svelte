@@ -8,20 +8,9 @@
 <SubHeading> Settings </SubHeading>
 
 <label for="preferredMapApp">What is your preferred Map App</label>
-<select bind:value={$vendor.preferredMapApp} id="preferredMapApp">
+<select bind:value={$vendor.preferredMapApp} id="preferredMapApp" class="select">
   {#each mapOptions as mapOption}
     <option value={mapOption}>{mapOption}</option>
   {/each}
 </select>
 
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
-<h1>Settings</h1>
