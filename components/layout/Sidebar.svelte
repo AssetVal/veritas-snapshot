@@ -1,14 +1,14 @@
 <script lang="ts">
   import SidebarHeader from './SidebarHeader.svelte';
+  import { goto } from '@roxi/routify';
   export let open = false;
   let classes;
 
-  $: {
-    if (open){
-      classes = 'sidebar show';
-    } else {
-      classes = 'sidebar'
-    }
+  $: (open) ? (classes = 'sidebar show') : (classes = 'sidebar')
+
+  function goHome(){
+    open = false;
+    $goto('../', {}, true)
   }
 </script>
 
@@ -37,5 +37,16 @@
 <aside class={classes}>
   <div class="flex flex-col h-full">
     <SidebarHeader bind:sidebarOpen={open}/>
+    <div class="flex-1 relative overflow-hidden">
+      <nav class="pt-4 pb-1 mb-4 w-full bg-transparent">
+        <ul class="block list-none">
+          <li on:click={goHome}>
+            <span class="pr-6 pl-4 py-2 overflow-hidden text-lg">
+              Home
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </aside>
