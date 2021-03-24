@@ -16,7 +16,6 @@
 
   * :global(.card) {
     border-radius: 0.25rem;
-    border-width: 1px;
     border: 1px solid #e2e8f0;
     margin-bottom: 3rem;
     padding: 2rem;
