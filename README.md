@@ -1,25 +1,29 @@
-# routify-starter
+<h1 align="center">Welcome to veritas-snapshot 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/node-15.12.0-blue.svg" />
+  <img src="https://img.shields.io/badge/npm-7.6.3-blue.svg" />
+</p>
 
-Starter template for [Routify](https://github.com/sveltech/routify).
+> Quick photos uploaded while out in the field
 
-### Get started
+## Prerequisites
 
-#### Starter templates
-| Template                                  | Description                                                 |
-|-------------------------------------------|-------------------------------------------------------------|
-| [master](https://example.routify.dev/)    | Default template, includes examples folder                  |
-| [blog](https://blog-example.routify.dev/) | Generates a blog from local markdown posts. Includes mdsvex |
-| [auth](https://auth-example.routify.dev/) | Embedded login on protected pages. Includes Auth0           |
+- node 15.12.0
+- npm 7.6.3
 
-To use a template, run:
+## Install
 
-`npx @sveltech/routify init`
+```sh
+npm install
+```
 
-or
+## Author
 
-`npx @sveltech/routify init --branch <branch-name>`
+👤 **Antonio Bourassa**
 
-The above commands will populate the current directory, they don't create a new one.
+* Website:
+* Github: [@Abourass](https://github.com/Abourass)
 
 ### npm scripts
 
@@ -33,35 +37,9 @@ The above commands will populate the current directory, they don't create a new 
 | `deploy:*`       | Deploy to netlify or now                                                          |
 | `export`         | Create static pages from content in dist folder (used by `npm run build`)         |
 
-### SSR and pre-rendering
+## Show your support
 
-SSR and pre-rendering are included in the default build process.
+Give a ⭐️ if this project helped you!
 
-`npm run deploy:(now|netlify)` will deploy the app with SSR and prerendering included.
-
-To render async data, call the `$ready()` helper whenever your data is ready.
-
-If $ready() is present, rendering will be delayed till the function has been called.
-
-Otherwise it will be rendered instantly.
-
-See [src/pages/example/api/[showId].svelte](https://github.com/sveltech/routify-starter/blob/master/src/pages/example/api/%5BshowId%5D.svelte) for an example.
-
-### Production
-
-* For SPA or SSR apps please make sure that url rewrite is enabled on the server.
-* For SPA redirect to `__app.html`.
-* For SSR redirect to the lambda function or express server.
-
-### Typescript
-
-For Typescript, we recommend [@lamualfa](https://github.com/lamualfa) excellent [routify-ts](https://github.com/lamualfa/routify-ts/)
-
-New project: `npx routify-ts init <project-name> [routify-init-args]`
-
-Existing project: `npx routify-ts convert [project-directory]`
-
-
-### Issues?
-
-File on Github! See https://github.com/sveltech/routify/issues .
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
