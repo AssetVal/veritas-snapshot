@@ -2,12 +2,15 @@
   import { vendor } from '../../../../stores/vendor';
   import { goto } from '@roxi/routify';
   import logInToVeritas from '../../../_modules/logIn';
+  import { toast } from '@zerodevx/svelte-toast'
 
   // Variables
   let email, password;
 
   // Functions
-  function login(){
+  function login(event){
+    event.preventDefault();
+
     logInToVeritas(email, password).then(response => {
       if (response.status === 'success'){
         $vendor = {...response.data};
@@ -17,7 +20,7 @@
          *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
         $goto(window.location.href);
       } else {
-        console.log('Nope')
+        toast.push(response.message)
       }
     })
   }
@@ -45,7 +48,7 @@
   }
 </style>
 
-<form class="pt-12 px-8 pb-4 rounded bg-white shadow relative mw-420">
+<form class="pt-12 px-8 pb-4 rounded bg-white shadow relative mw-420" on:submit={login}>
   <div class="m-4 relative">
     <input
       required
@@ -69,11 +72,7 @@
   </div>
 
   <div class="m-4 flex justify-center">
-    <button
-      class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-full"
-      on:click={login}
-      type="button"
-    > Sign In </button>
+    <button class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-full"> Sign In </button>
   </div>
 
   <div class="text-center pt-4">
