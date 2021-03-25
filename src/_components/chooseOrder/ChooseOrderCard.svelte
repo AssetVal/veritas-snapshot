@@ -3,6 +3,7 @@
   import Card from '../layout/Card.svelte';
   import Order from '../../../classes/Order';
   import encodeGoogleURL from '../../_modules/encodeGoogleURL';
+  import { goto } from '@roxi/routify';
 
   // Props
   export let order = new Order();
@@ -14,7 +15,7 @@
 
   // Functions
   function openOrder(){
-    console.log('CLICKED =>', order._id);
+    $goto("./order", {_id: order._id});
   }
 
   function openDirections(){
