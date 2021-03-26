@@ -68,5 +68,10 @@
       "blacklist": [
          "/example/modal/basic/4"
       ]
+   },
+   "dependencies": {
+      "@uppy/core": "^1.16.2",
+      "@uppy/svelte": "^0.1.6",
+      "@uppy/webcam": "^1.8.7"
    }
 }
