@@ -1,6 +1,6 @@
 <script>
   import {vendor} from '../../stores/vendor';
-  import {goto} from '@roxi/routify';
+  import { goto } from '@roxi/routify';
   import Header from '../../components/layout/Header.svelte';
   import Sidebar from '../../components/layout/Sidebar.svelte';
 
