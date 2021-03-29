@@ -32,5 +32,8 @@
     <div class="flex items-center px-2 md:hidden lg:hidden xl:hidden 2xl:hidden">
       <Hamburger bind:open={sidebar}/>
     </div>
+    {#if $$slots.infoArea}
+      <slot name="infoArea" />
+    {/if}
   </div>
 </header>
