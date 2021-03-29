@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import {vendor} from '../../stores/vendor';
   import { goto } from '@roxi/routify';
   import Header from '../../components/layout/Header.svelte';
