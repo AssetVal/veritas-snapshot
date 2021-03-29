@@ -37,16 +37,16 @@
 <header class="sidebar-header">
   <div class="p-4 w-full flex flex-row border-none items-center btn-account focus:outline-none">
     <span class="mr-3 w-12 h-12 text-5xl relative inline-block align-middle">
-      {#if $vendor.user.imgDef}
-        <img class="rounded-full" alt="User Avatar" src="https://s3.us-west-1.amazonaws.com/veritasprofile/{$vendor.user._id}-profile.webp">
+      {#if $vendor?.user.imgDef}
+        <img class="rounded-full" alt="User Avatar" src="https://s3.us-west-1.amazonaws.com/veritasprofile/{$vendor?.user._id}-profile.webp">
       {/if}
     </span>
     <span class="mr-3 block text-left flex-1 overflow-hidden overflow-clip">
       <span class="text-lg block overflow-hidden overflow-ellipsis whitespace-nowrap font-semibold">
-        {$vendor.user.name.nickname} {$vendor.user.name.last}
+        {$vendor?.user.name.nickname} {$vendor?.user.name.last}
       </span>
       <span class="block overflow-hidden overflow-ellipsis whitespace-nowrap description">
-        {$vendor.user.desc}
+        {$vendor?.user.desc}
       </span>
     </span>
     <button class={classes} on:click={() => sidebarOpen = false}>
