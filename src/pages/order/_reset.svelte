@@ -16,14 +16,16 @@
 
 {#if $vendor}
   <Header bind:sidebar={sidebarOpen}>
-    <div class="bg-coolGray-600 text-white flex flex-col rounded px-3 -ml-2" slot="infoArea">
+    <div class="bg-dark-transparent flex flex-col px-3 -ml-2 h-full opacity-90" slot="infoArea">
       {#if $order?.address.street}
-        <span class="text-xl">
-          {$order?.address.street}{#if $order.address.unitNumber}, {$order.address.unitNumber}{/if}
+        <span class="text-xl text-white opacity-100">
+          {$order.address.street}{#if $order.address.unitNumber}, {$order.address.unitNumber}{/if}
         </span>
       {/if}
-      {#if $order.address.city}
-        <small>{$order?.address.city}, {$order?.address.state}, {$order?.address.zip}</small>
+      {#if $order?.address.city}
+        <small class="text-lg text-white">
+          {$order?.address.city}, {$order?.address.state}, {$order?.address.zip}
+        </small>
       {/if}
     </div>
   </Header>
