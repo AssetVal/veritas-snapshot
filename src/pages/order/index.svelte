@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { Dashboard } from '@uppy/svelte'
-  import Uppy from '@uppy/core'
-  import { params } from '@roxi/routify';
+  import {Dashboard} from '@uppy/svelte';
+  import Uppy from '@uppy/core';
+  import {params} from '@roxi/routify';
   import {vendor} from '../../../stores/vendor';
   import Order from '../../../classes/Order';
+  import SubHeading from '../../../components/layout/SubHeading.svelte';
 
   let order: Order = $vendor.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
   let uppy = new Uppy();
@@ -14,15 +15,17 @@
   @import '@uppy/dashboard/dist/style.css';
 </style>
 
-<div>
+<SubHeading>
   <h1>{order.address.street}</h1>
-</div>
+</SubHeading>
+
 <div class="h-full">
   <Dashboard
     uppy={uppy}
-    height={350}
-    inline={true}
-    proudlyDisplayPoweredByUppy={false}
+    props={{
+      height: 350,
+      proudlyDisplayPoweredByUppy: false
+    }}
   />
 </div>
 
