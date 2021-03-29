@@ -38,6 +38,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        dark: {
+          transparent: '#00000021'
+        },
         coolGray: colors.coolGray,
         black: {
           plum: '#323248',
