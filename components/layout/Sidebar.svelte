@@ -14,7 +14,7 @@
   // Functions
   function goHome() {
     open = false;
-    $goto('../')
+    $goto('/')
   }
 
   function logout() {
@@ -24,7 +24,7 @@
 
   function goToSettings() {
     open = false;
-    $goto("./settings");
+    $goto("/settings");
   }
 </script>
 
