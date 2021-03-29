@@ -7,7 +7,20 @@
   import SubHeading from '../../../components/layout/SubHeading.svelte';
 
   let order: Order = $vendor.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
-  let uppy = new Uppy();
+  const uppyInstance = () => new Uppy({
+    autoProceed: true,
+    restrictions: {
+      maxFileSize: 10000000,
+      maxNumberOfFiles: 1,
+      allowedFileTypes: ['image/*']
+    }});
+
+  const exteriorPhotoCategories = [
+    {text: 'Front View', id: 'frontView'},
+    {text: 'Front Angled View', id: 'frontAngledView'},
+    {text: 'Street View', id: 'streetView'},
+    {text: 'Address Verification', id: 'addressVerification'},
+  ]
 </script>
 
 <style global>
@@ -20,12 +33,16 @@
 </SubHeading>
 
 <div class="h-full">
-  <Dashboard
-    uppy={uppy}
-    props={{
-      height: 350,
-      proudlyDisplayPoweredByUppy: false
-    }}
-  />
+  {#each exteriorPhotoCategories as category, index}
+    <h1>{category.text}</h1>
+    <Dashboard
+      uppy={uppyInstance()}
+      props={{
+        height: 350,
+        proudlyDisplayPoweredByUppy: false,
+        note: `${category.text}; Up to 10mb;`
+      }}
+    />
+  {/each}
 </div>
 
