@@ -58,7 +58,7 @@
     <div class="flex-1 relative overflow-hidden">
       <nav class="pt-4 pb-1 mb-4 w-full bg-transparent">
         <ul class="block list-none">
-          <li on:click={goHome} class="cursor-pointer flex flex-row d-item {$isActive('./index', true) ? 'active' : ''}" >
+          <li on:click={goHome} class="cursor-pointer flex flex-row d-item {$isActive('/', true) ? 'active' : ''}" >
             <div class="flex items-center pl-3 pr-2">
               <HomeIcon />
             </div>
