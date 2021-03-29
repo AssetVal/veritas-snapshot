@@ -1,6 +1,6 @@
 <script lang="ts">
   import SidebarHeader from './SidebarHeader.svelte';
-  import {goto, isActive} from '@roxi/routify';
+  import { goto, isActive } from '@roxi/routify';
   import {vendor} from '../../stores/vendor';
   import HomeIcon from '../icons/HomeIcon.svelte';
   import CogIcon from '../icons/CogIcon.svelte';
