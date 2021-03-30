@@ -1,16 +1,10 @@
 <script lang="ts">
-  import {Dashboard} from '@uppy/svelte';
+  import { Dashboard } from '@uppy/svelte';
   import { order } from '../../../stores/order';
-  import Uppy from '@uppy/core';
+  import uppyInstance from './_modules/uppyFactory';
+  import changeUppyTheme from './_modules/changeUppyTheme';
 
   console.log($order)
-  const uppyInstance = () => new Uppy({
-    autoProceed: true,
-    restrictions: {
-      maxFileSize: 10000000,
-      maxNumberOfFiles: 1,
-      allowedFileTypes: ['image/*']
-    }});
 
   const exteriorPhotoCategories = [
     {text: 'Front View', id: 'frontView', required: true},
@@ -25,22 +19,28 @@
     {text: 'Backyard', id: 'backyard', required: true},
     {text: 'Address Verification', id: 'addressVerification', required: true},
     {text: 'Exterior', id: 'exterior', required: false}
-  ]
+  ];
 
-  setTimeout(() => {
-    document.querySelectorAll('.uppy-Dashboard-AddFiles-title').forEach(el => {
-      el.childNodes[0].textContent = 'Click here';
-      el.childNodes[1].textContent = 'to browse or shoot';
-    });
-  }, 180)
+  setTimeout(changeUppyTheme, 180);
+  window.onresize = changeUppyTheme
 </script>
 
 <style global>
   @import '@uppy/core/dist/style.css';
   @import '@uppy/dashboard/dist/style.css';
+
+  /* Align the open cam link */
+  .center-text { text-align: center !important; }
+  /* Remove the underline from the open cam link, instead bold font*/
+  .center-text:focus {
+    border: none;
+    font-weight: 600;
+  }
+  /* Remove the dotted line around each Uppy dashboard instance */
+  [data-uppy-drag-drop-supported=true] .uppy-Dashboard-AddFiles { border: none !important; }
 </style>
 
-<div class="h-full grid grid-cols-2 gap-3">
+<div class="h-full grid grid-cols-2 gap-3 pt-4">
   {#each exteriorPhotoCategories as category, index}
     <div class="">
       <div class="flex justify-center">
@@ -50,9 +50,8 @@
         uppy={uppyInstance()}
         props={{
         inline: true,
-        height: 225,
+        height: 230,
         proudlyDisplayPoweredByUppy: false,
-        note: `${category.text}; Up to 10mb;`
       }}
       />
     </div>
