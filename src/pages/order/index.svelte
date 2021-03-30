@@ -15,7 +15,6 @@
   const exteriorPhotoCategories = [
     {text: 'Front View', id: 'frontView', required: true},
     {text: 'Front Angled View', id: 'frontAngledView', required: true},
-    {text: 'Address Verification', id: 'addressVerification', required: true},
     {text: 'Front View Right', id: 'frontViewRight', required: true},
     {text: 'Front View Left', id: 'frontViewLeft', required: true},
     {text: 'Street View', id: 'streetView', required: true},
@@ -24,15 +23,15 @@
     {text: 'Left Side of Dwelling', id: 'leftSideOfDwelling', required: true},
     {text: 'Rear of Dwelling', id: 'rearOfDwelling', required: true},
     {text: 'Backyard', id: 'backyard', required: true},
+    {text: 'Address Verification', id: 'addressVerification', required: true},
     {text: 'Exterior', id: 'exterior', required: false}
   ]
 
   setTimeout(() => {
-    const bodyElements = document.querySelectorAll('.uppy-Dashboard-AddFiles-title');
-    bodyElements.forEach(el => {
+    document.querySelectorAll('.uppy-Dashboard-AddFiles-title').forEach(el => {
       el.childNodes[0].textContent = 'Click here';
       el.childNodes[1].textContent = 'to browse or shoot';
-    })
+    });
   }, 180)
 </script>
 
@@ -41,7 +40,7 @@
   @import '@uppy/dashboard/dist/style.css';
 </style>
 
-<div class="h-full grid grid-cols-3 gap-3">
+<div class="h-full grid grid-cols-2 gap-3">
   {#each exteriorPhotoCategories as category, index}
     <div class="">
       <div class="flex justify-center">
