@@ -1,10 +1,12 @@
 <script lang="ts">
   import {vendor} from '../../stores/vendor';
-  import ChooseOrderCard from '../_components/chooseOrder/ChooseOrderCard.svelte';
+  import ChooseOrderCard from '../_components/orders/ChooseOrderCard.svelte';
   import SubHeading from '../../components/layout/SubHeading.svelte';
   import Wrapper from '../../components/layout/Wrapper.svelte';
   import Card from '../_components/layout/Card.svelte';
 </script>
+
+<!-- routify:option name="Veritas-Snapshot" -->
 
 <SubHeading>
   Orders
