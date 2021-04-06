@@ -8,7 +8,7 @@
 <SubHeading>Interior Photos</SubHeading>
 <div class="h-full grid grid-cols-1 gap-3">
   <Dashboard
-    uppy={uppyInstance($order._id, 'None')}
+    uppy={uppyInstance(50, $order._id, 'None')}
     props={{
       inline: true,
       height: 300,

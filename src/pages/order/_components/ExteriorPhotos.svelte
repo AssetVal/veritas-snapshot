@@ -28,7 +28,7 @@
         <small class="text-center">{category.text}</small>
       </div>
       <Dashboard
-        uppy={uppyInstance($order._id, category.id)}
+        uppy={uppyInstance(1, $order._id, category.id)}
         props={{
           inline: true,
           height: 230,
