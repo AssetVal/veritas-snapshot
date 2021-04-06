@@ -14,7 +14,7 @@ export default function uppyInstance(maxPhotos: number, orderID: string, imageCa
         (maxPhotos > 1) ? 'interior' : 'exterior'
       }/${imageCategory}`,
       formData: true,
-      fieldName: 'file',
+      fieldName: 'files',
       bundle: true,
   });
 }
