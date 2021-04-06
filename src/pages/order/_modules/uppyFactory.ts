@@ -12,7 +12,7 @@ export default function uppyInstance(maxPhotos: number, orderID: string, imageCa
     }}).use(XHRUpload, {
       endpoint: `https://www.assetval.club/api/snapshotUpload/${orderID}/${
         (maxPhotos > 1) ? 'interior' : 'exterior'
-      }${imageCategory}`,
+      }/${imageCategory}`,
       formData: true,
       fieldName: 'file',
       bundle: true,
