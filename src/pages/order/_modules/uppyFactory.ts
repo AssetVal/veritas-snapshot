@@ -1,7 +1,7 @@
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 
-export default function uppyInstance(suffix: string){
+export default function uppyInstance(orderID: string, imageCategory: string){
   // @ts-ignore
   return new Uppy({
     autoProceed: true,
@@ -10,7 +10,7 @@ export default function uppyInstance(suffix: string){
       maxNumberOfFiles: 1,
       allowedFileTypes: ['image/*']
     }}).use(XHRUpload, {
-      endpoint: `http://192.168.245.108:5000/externalAPI/${suffix}`,
+      endpoint: `https://www.assetval.club/api/snapshotUpload/${orderID}/exterior${imageCategory}`,
       formData: true,
       fieldName: 'file',
       bundle: true,

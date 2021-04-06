@@ -17,10 +17,7 @@
   /* Align the open cam link */
   .center-text { text-align: center !important; }
   /* Remove the underline from the open cam link, instead bold font*/
-  .center-text:focus {
-    border: none;
-    font-weight: 600;
-  }
+  .center-text:focus { border: none; font-weight: 600; }
   /* Remove the dotted line around each Uppy dashboard instance */
   [data-uppy-drag-drop-supported=true] .uppy-Dashboard-AddFiles { border: none !important; }
 </style>
