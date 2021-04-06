@@ -1,5 +1,6 @@
 <script lang="ts">
   import {Dashboard} from '@uppy/svelte';
+  import {order} from '../../../../stores/order';
   import uppyInstance from '../_modules/uppyFactory';
   import SubHeading from '../../../../components/layout/SubHeading.svelte';
 
@@ -27,7 +28,7 @@
         <small class="text-center">{category.text}</small>
       </div>
       <Dashboard
-        uppy={uppyInstance(category.id)}
+        uppy={uppyInstance($order._id, category.id)}
         props={{
           inline: true,
           height: 230,
