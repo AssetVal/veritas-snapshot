@@ -1,4 +1,5 @@
 import type Vendor from '../../classes/Vendor';
+import postToVeritas, {fetchResult} from './postToVeritas';
 
 /**
  * | Prop | Value |
@@ -9,28 +10,10 @@ import type Vendor from '../../classes/Vendor';
  * |----|----|
  * | data | {@link Vendor} |
  */
-export interface logInResult {
-  status: 'success' | 'failure' | 'error'
-  message: string,
-  data?: Vendor
-}
+export interface logInResult extends fetchResult {data?: Vendor}
 
 export default async function logInToVeritas(email: string, password: string): Promise<logInResult> {
   try {
-    const headers = new Headers();
-    headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", email);
-    urlencoded.append("password", password);
-
-    const response = await fetch('https://www.assetval.club/api/snapshotLogIn', {
-      method: 'POST',
-      headers: headers,
-      body: urlencoded,
-      redirect: 'follow'
-    });
-
-    return await response.json();
+    return postToVeritas('snapshotLogIn', {email, password})
   } catch (err) { console.error(err); }
 }
