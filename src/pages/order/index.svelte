@@ -23,6 +23,7 @@
 </style>
 
 <ExteriorPhotos />
+
 {#if $order.services.isInterior}
   <InteriorPhotos />
 {/if}
