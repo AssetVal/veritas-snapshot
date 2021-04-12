@@ -42,6 +42,10 @@ export interface iVendor extends IBaseVendor {
   _id: any;
   user: User,
   realtorCode: number,
+  snapshotPreferences: {
+    preferredMapApp: 'Google Maps'|'Waze',
+    pushNotifications: boolean,
+  }
   paymentPreferences: {
     paymentMethod: string,
     remittanceEntityName: string,
@@ -113,6 +117,10 @@ export interface iVendor extends IBaseVendor {
 
 export class Vendor extends BaseVendor {
   _id: any
+  snapshotPreferences: {
+    preferredMapApp: 'Google Maps'|'Waze',
+    pushNotifications: boolean,
+  };
   user: User;
   realtorCode: number;
   paymentPreferences: {
