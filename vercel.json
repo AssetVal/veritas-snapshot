@@ -1,9 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "api/vercel-ssr/index.js": {
-      "includeFiles": "dist/**"
-    }
+    "api/vercel-ssr/index.js": { "includeFiles": "dist/**" }
   },
   "routes": [
     {

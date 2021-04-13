@@ -1,15 +1,15 @@
 <script lang="ts">
   import { vendor } from '../../../stores/vendor';
   import { beforeUrlChange } from '@roxi/routify';
-  import SubHeading from '../../../components/layout/SubHeading.svelte';
   import saveSettings from '../../_modules/saveSettings';
+  import SubHeading from '../../../components/layout/SubHeading.svelte';
 
   interface iPush { value: boolean, text: 'Yes'|'No' }
 
   const mapOptions: Array<'Google Maps'|'Waze'> = ['Google Maps', 'Waze'];
   const pushOptions: Array<iPush> = [{value: false, text: 'No'}, {value: true, text: 'Yes'}];
 
-  $beforeUrlChange(async(event, store) => {
+  $beforeUrlChange(async() => {
     await saveSettings($vendor._id, {
       preferredMapApp: $vendor.snapshotPreferences.preferredMapApp,
       pushNotifications: $vendor.snapshotPreferences.pushNotifications
