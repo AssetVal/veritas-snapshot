@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { SvelteToast } from '@zerodevx/svelte-toast'
   import Sidebar from '../../../components/layout/Sidebar.svelte';
   import Header from '../../../components/layout/Header.svelte';
   import {vendor} from '../../../stores/vendor';
@@ -20,6 +21,7 @@
 </style>
 
 {#if $vendor}
+  <SvelteToast />
   <Header bind:sidebar={sidebarOpen}>
     <div class="flex flex-row justify-between w-full" slot="infoArea">
       <div class="bg-dark-transparent flex flex-col px-3 -ml-2 h-full opacity-90">
