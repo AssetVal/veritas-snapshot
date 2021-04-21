@@ -1,6 +1,13 @@
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import { toast } from '@zerodevx/svelte-toast'
+import toastThemes from '../../../_modules/toastThemes';
+
+interface VeritasResponse {
+  message: string,
+  status: 'success'|'error',
+  href: string|Array<string>
+}
 
 export default function uppyInstance(maxPhotos: number, orderID: string, imageCategory: string){
   const intExt = (maxPhotos > 1) ? 'interior' : 'exterior';
@@ -26,8 +33,15 @@ export default function uppyInstance(maxPhotos: number, orderID: string, imageCa
     if (result.successful.length > 0){
       if (result.successful.length === 1){ // Exterior Photo
         const exteriorPhoto = result.successful[0];
-        const veritasResponse: { message: string } = exteriorPhoto.response.body;
-        toast.push(veritasResponse.message)
+        const {status, message, href}: VeritasResponse = exteriorPhoto.response.body;
+
+        if (status === 'success'){
+          toast.push(message, toastThemes.success)
+        } else if (status === 'error') {
+          toast.push(message, toastThemes.error)
+        } else {
+          toast.push(message)
+        }
       }
     }
   });
