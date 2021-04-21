@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Swal from 'sweetalert2';
   import {Dashboard} from '@uppy/svelte';
   import {order} from '../../../../stores/order';
   import uppyInstance from '../_modules/uppyFactory';
@@ -7,8 +8,9 @@
     exteriorPhotoCategoriesForInteriorOrders,
     optionalPhotoCategories
   } from '../_data/exteriorPhotoCategories';
-  import SubHeading from '../../../../components/layout/SubHeading.svelte';
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
+  import SubHeading from '../../../../components/layout/SubHeading.svelte';
+
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
 
@@ -29,7 +31,13 @@
         <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
           <div>&nbsp;</div>
           <span class="text-center ml-auto ">{category.text}</span>
-          <div class="ml-auto pr-1 flex items-center">
+          <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
+            Swal.fire({
+              title: category.text,
+              text: category.hint,
+              icon: 'info'
+            })
+          }}>
               <HelpIcon classes="h-5 w-5"/>
           </div>
         </div>
