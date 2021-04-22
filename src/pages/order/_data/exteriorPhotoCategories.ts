@@ -1,4 +1,21 @@
-export const exteriorPhotoCategories: Array<{ text: string; id: string; required: boolean, hint: string, order: number }> = [
+export type photoCategoryIDs = 'frontView'
+                            | 'frontAngledView'
+                            | 'frontViewLeft'
+                            | 'frontViewRight'
+                            | 'streetView'
+                            | 'oppositeStreetView'
+                            | 'addressVerification'
+                            | 'exterior'
+                            | 'leftSideOfDwelling'
+                            | 'rightSideOfDwelling'
+                            | 'rearOfDwelling'
+                            | 'backyard'
+                            | 'roof'
+                            | 'exteriorPaint'
+                            | 'viewsAndScenery'
+                            | 'neighborhoodInfluences'
+
+export const exteriorPhotoCategories: Array<{ text: string; id: photoCategoryIDs; required: boolean, hint: string, order: number }> = [
   {
     text: 'Front View',
     id: 'frontView',
@@ -59,7 +76,7 @@ export const exteriorPhotoCategories: Array<{ text: string; id: string; required
   },
 ];
 
-export const exteriorPhotoCategoriesForInteriorOrders: Array<{ text: string; id: string; required: boolean, hint: string, order: number }> = [
+export const exteriorPhotoCategoriesForInteriorOrders: Array<{ text: string; id: photoCategoryIDs; required: boolean, hint: string, order: number }> = [
   {
     text: 'Left Side of Dwelling',
     id: 'leftSideOfDwelling',
@@ -90,7 +107,7 @@ export const exteriorPhotoCategoriesForInteriorOrders: Array<{ text: string; id:
   },
 ]
 
-export const optionalPhotoCategories: Array<{ text: string; id: string; required: boolean, hint: string, order: number }> = [
+export const optionalPhotoCategories: Array<{ text: string; id: photoCategoryIDs; required: boolean, hint: string, order: number }> = [
   {
     text: 'Roof',
     id: 'roof',
