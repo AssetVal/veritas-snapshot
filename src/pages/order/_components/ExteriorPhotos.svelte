@@ -1,15 +1,20 @@
 <script lang="ts">
   import Swal from 'sweetalert2';
   import {Dashboard} from '@uppy/svelte';
+  import {toast} from '@zerodevx/svelte-toast';
   import {order} from '../../../../stores/order';
   import uppyInstance from '../_modules/uppyFactory';
   import {
     exteriorPhotoCategories,
     exteriorPhotoCategoriesForInteriorOrders,
-    optionalPhotoCategories
+    optionalPhotoCategories,
   } from '../_data/exteriorPhotoCategories';
+  import toastThemes from '../../../_modules/toastThemes';
+  import type {VeritasResponse} from '../_modules/uppyFactory';
+  import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
-  import SubHeading from '../../../../components/layout/SubHeading.svelte';
+  import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
+  import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
 
@@ -20,12 +25,63 @@
       ...optionalPhotoCategories
     ].sort(({order: a}, {order: b}) => a - b)
   }
+
+  const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
+    const uppy = uppyInstance(1, $order, category);
+
+    uppy.on('complete', async (result): Promise<void> => {
+      console.log('successful files:', result.successful);
+      console.log('failed files:', result.failed);
+
+      if (result.successful.length > 0) {
+        if (result.successful.length === 1) { // Exterior Photo
+          const exteriorPhoto = result.successful[0];
+          const {status, message, href}: VeritasResponse = exteriorPhoto.response.body;
+
+          if (status === 'success') {
+            toast.push(message, toastThemes.success);
+            $order.photos.exteriorFiles = [...$order.photos.exteriorFiles, {name: href as string, category: category}]
+          } else if (status === 'error') {
+            toast.push(message, toastThemes.error)
+          } else {
+            toast.push(message)
+          }
+        }
+      }
+    });
+    return uppy;
+  }
+
+  const clearExteriorPhotos = async () => {
+    const {status, message, data} = await clearPhotosFolder('exterior', $order)
+
+    if (status === 'success') {
+      toast.push(message, toastThemes.success);
+      $order = data;
+    } else if (status === 'error') {
+      toast.push(message, toastThemes.error)
+    } else {
+      toast.push(message)
+    }
+  }
 </script>
 
-<SubHeading>Exterior Photos</SubHeading>
+<div class="flex f-row">
+  <header class="mt-3 mb-1 p-0 block">
+    <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2">
+      Exterior Photos
+    </h1>
+  </header>
+  <div class="ml-auto flex items-center">
+    <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer" on:click={clearExteriorPhotos}>
+      <TrashIcon height="1.4rem" width="1.4rem" />
+    </div>
+  </div>
+</div>
+
 <div class="h-full grid grid-cols-2 gap-3">
   {#each photoCategories as category, index}
-    {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length === 1}
+    {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
       <img src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id).name} alt="{category.text}">
     {:else}
       <div>
@@ -45,7 +101,7 @@
           </div>
         </div>
         <Dashboard
-          uppy={uppyInstance(1, $order, category.id)}
+          uppy={exteriorPhotosUppyInstance(category.id)}
           props={{
           inline: true,
           height: 230,
