@@ -18,6 +18,7 @@
   import Image from '../../../../components/layout/Image.svelte';
   import {vendor} from '../../../../stores/vendor';
   import Order from '../../../../classes/Order';
+  import clearImage from '../../../_modules/clearImage';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
   let uploadedCategories = [];
@@ -57,6 +58,33 @@
       }
     });
     return uppy;
+  }
+
+  const clearPhoto = async(category: {id: string, text: string}) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `Yes, delete the ${category.text}`
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const {status, message, data} = await clearImage('exterior', $order, category.id)
+
+        if (status === 'success') {
+          toast.push(message, toastThemes.success);
+          $order = data;
+          $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+          uploadedCategories = uploadedCategories.filter(entry => entry !== category.id);
+        } else if (status === 'error') {
+          toast.push(message, toastThemes.error)
+        } else {
+          toast.push(message)
+        }
+      }
+    })
   }
 
   const clearExteriorPhotos = async () => {
@@ -109,9 +137,7 @@
           <span class="text-center ml-auto ">{category.text}</span>
 
           {#if uploadedCategories.includes(category.id)}
-            <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
-              Swal.fire({ title: category.text, text: category.hint, icon: 'info'})
-            }}>
+            <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={clearPhoto(category)}>
               <TrashIcon classes="h-5 w-5"/>
             </div>
           {:else}
