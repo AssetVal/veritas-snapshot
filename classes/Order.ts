@@ -3,6 +3,7 @@ import type SystemOrderComment from './SystemOrderComment';
 import type ProductType from './ProductType';
 import type Vendor from './Vendor';
 import type AnalystOrderComment from './AnalystOrderComment';
+import type {photoCategoryIDs} from '../src/pages/order/_data/exteriorPhotoCategories';
 
 export declare interface iOrder {
   _id: string
@@ -23,7 +24,7 @@ export declare interface iOrder {
   photos?: {
     exteriorFiles?: Array<{
       name: string,
-      category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum'
+      category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum' | photoCategoryIDs
     }>,
     interiorFiles?: Array<{
       name: string,
@@ -223,7 +224,7 @@ export class Order implements iOrder {
     exteriorFiles?: Array<{
       _id?: string;
       name: string,
-      category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum'
+      category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum'| photoCategoryIDs
     }>,
     interiorFiles?: Array<{
       _id?: string;
