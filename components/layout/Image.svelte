@@ -2,6 +2,10 @@
   export let src;
   export let alt;
   export let caption = ''
+
+  let expanded = false;
+
+  const toggleZoom = () => {(expanded === false) ? (expanded = true) : (expanded = false)}
 </script>
 
 <style>
@@ -16,7 +20,6 @@
 
   /* The Modal (background) */
   .modal {
-    display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
@@ -27,6 +30,10 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+
+  .hidden {
+    display: none
   }
 
   /* Modal Content (Image) */
@@ -63,10 +70,10 @@
   /* The Close Button */
   .close {
     position: absolute;
-    top: 15px;
-    right: 35px;
+    top: 6vh;
+    right: 1.3vw;
     color: #f1f1f1;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
     transition: 0.3s;
   }
@@ -84,16 +91,17 @@
   }
 </style>
 
-<img {src} {alt} class="img w-full max-h-56">
+<img {src} {alt} class="img w-full max-h-56" on:click={toggleZoom}>
 
 <!-- The Modal -->
-<div class="modal">
+<div class="modal {(expanded === false) ? 'hidden' : 'block'}" on:click={toggleZoom}>
 
   <!-- The Close Button -->
   <span class="close">&times;</span>
 
-  <!-- Modal Content (The Image) -->
-  <img class="modal-content">
+  {#if expanded}
+    <img class="modal-content" {src} {alt}>
+  {/if}
 
   <!-- Modal Caption (Image Text) -->
   <div class="caption">{caption}</div>
