@@ -13,6 +13,7 @@
 <style global>
   @import '@uppy/core/dist/style.css';
   @import '@uppy/dashboard/dist/style.css';
+  @import '@uppy/image-editor/dist/style.css';
 
   /* Align the open cam link */
   .center-text { text-align: center !important; }
