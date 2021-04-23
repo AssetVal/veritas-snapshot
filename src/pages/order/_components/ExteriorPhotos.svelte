@@ -117,10 +117,10 @@
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
           props={{
-          inline: true,
-          height: 230,
-          proudlyDisplayPoweredByUppy: false,
-        }}
+            inline: true,
+            height: 230,
+            proudlyDisplayPoweredByUppy: false,
+          }}
         />
       {/if}
     </div>

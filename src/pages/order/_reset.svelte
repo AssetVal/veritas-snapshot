@@ -13,7 +13,7 @@
 
   let sidebarOpen = false;
 
-  $: if (!$vendor) $goto('../login',);
+  $: if (!$vendor) $goto('../login', {}, true);
 </script>
 
 <style>
