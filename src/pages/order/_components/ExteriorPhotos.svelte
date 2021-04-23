@@ -73,6 +73,7 @@
         if (status === 'success') {
           toast.push(message, toastThemes.success);
           $order = data;
+          $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
         } else if (status === 'error') {
           toast.push(message, toastThemes.error)
         } else {
