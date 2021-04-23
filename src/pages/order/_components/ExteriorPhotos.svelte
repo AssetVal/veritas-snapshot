@@ -19,6 +19,7 @@
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
+  import * as ImageEditor from '@uppy/image-editor';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
 
@@ -32,6 +33,8 @@
 
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     const uppy = uppyInstance(1, $order, category);
+
+
     uppy.on('complete', async(result): Promise<void> => {
       console.log('successful files:', result.successful);
       console.log('failed files:', result.failed);
@@ -120,6 +123,7 @@
             inline: true,
             height: 230,
             proudlyDisplayPoweredByUppy: false,
+            plugins: ['ImageEditor']
           }}
         />
       {/if}
