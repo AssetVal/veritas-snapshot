@@ -58,16 +58,28 @@
   }
 
   const clearExteriorPhotos = async () => {
-    const {status, message, data} = await clearPhotosFolder('exterior', $order)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete all exterior photos!'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const {status, message, data} = await clearPhotosFolder('exterior', $order)
 
-    if (status === 'success') {
-      toast.push(message, toastThemes.success);
-      $order = data;
-    } else if (status === 'error') {
-      toast.push(message, toastThemes.error)
-    } else {
-      toast.push(message)
-    }
+        if (status === 'success') {
+          toast.push(message, toastThemes.success);
+          $order = data;
+        } else if (status === 'error') {
+          toast.push(message, toastThemes.error)
+        } else {
+          toast.push(message)
+        }
+      }
+    })
   }
 </script>
 
