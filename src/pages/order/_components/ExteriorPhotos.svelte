@@ -15,6 +15,9 @@
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
+  import Image from '../../../../components/layout/Image.svelte';
+  import {vendor} from '../../../../stores/vendor';
+  import Order from '../../../../classes/Order';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
 
@@ -41,6 +44,8 @@
           if (status === 'success') {
             toast.push(message, toastThemes.success);
             $order.photos.exteriorFiles = [...$order.photos.exteriorFiles, {name: href as string, category: category}]
+            $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+
           } else if (status === 'error') {
             toast.push(message, toastThemes.error)
           } else {
@@ -81,25 +86,25 @@
 
 <div class="h-full grid grid-cols-2 gap-3">
   {#each photoCategories as category, index}
-    {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
-      <img src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].name} alt="{category.text}">
-    {:else}
-      <div>
-        <div class="flex justify-center">
-          <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
-            <div>&nbsp;</div>
-            <span class="text-center ml-auto ">{category.text}</span>
-            <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
+    <div>
+      <div class="flex justify-center">
+        <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
+          <div>&nbsp;</div>
+          <span class="text-center ml-auto ">{category.text}</span>
+          <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
             Swal.fire({
               title: category.text,
               text: category.hint,
               icon: 'info'
             })
           }}>
-              <HelpIcon classes="h-5 w-5"/>
-            </div>
+            <HelpIcon classes="h-5 w-5"/>
           </div>
         </div>
+      </div>
+      {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
+        <Image src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].name} alt="{category.text}"/>
+      {:else}
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
           props={{
@@ -108,7 +113,7 @@
           proudlyDisplayPoweredByUppy: false,
         }}
         />
-      </div>
-    {/if}
+      {/if}
+    </div>
   {/each}
 </div>
