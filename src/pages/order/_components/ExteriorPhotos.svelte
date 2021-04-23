@@ -20,6 +20,7 @@
   import Order from '../../../../classes/Order';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
+  let uploadedCategories = [];
 
   if ($order.services.isInterior) {
     photoCategories = [
@@ -45,6 +46,7 @@
             toast.push(message, toastThemes.success);
             $order.photos.exteriorFiles = [...$order.photos.exteriorFiles, {name: href as string, category: category}]
             $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+            uploadedCategories = [...uploadedCategories, category]
 
           } else if (status === 'error') {
             toast.push(message, toastThemes.error)
@@ -74,6 +76,7 @@
           toast.push(message, toastThemes.success);
           $order = data;
           $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+          uploadedCategories = [];
         } else if (status === 'error') {
           toast.push(message, toastThemes.error)
         } else {
@@ -104,15 +107,20 @@
         <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
           <div>&nbsp;</div>
           <span class="text-center ml-auto ">{category.text}</span>
-          <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
-            Swal.fire({
-              title: category.text,
-              text: category.hint,
-              icon: 'info'
-            })
-          }}>
-            <HelpIcon classes="h-5 w-5"/>
-          </div>
+
+          {#if uploadedCategories.includes(category.id)}
+            <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
+              Swal.fire({ title: category.text, text: category.hint, icon: 'info'})
+            }}>
+              <TrashIcon classes="h-5 w-5"/>
+            </div>
+          {:else}
+            <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
+              Swal.fire({ title: category.text, text: category.hint, icon: 'info'})
+            }}>
+              <HelpIcon classes="h-5 w-5"/>
+            </div>
+          {/if}
         </div>
       </div>
       {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
