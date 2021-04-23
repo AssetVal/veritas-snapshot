@@ -1,36 +1,19 @@
 <script lang="ts">
-  import Swal from 'sweetalert2';
-  import uppyInstance from '../_modules/uppyFactory';
   import {Dashboard} from '@uppy/svelte';
   import {order} from '../../../../stores/order';
-  import {toast} from '@zerodevx/svelte-toast';
+  import uppyInstance from '../_modules/uppyFactory';
+  import toastResults from '../../../_modules/toastResults';
+  import confirmChoice from '../../../_modules/confirmationDialoge';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
-  import toastThemes from '../../../_modules/toastThemes';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
 
   const clearInteriorPhotos = async () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete all interior photos!'
-    }).then(async(result) => {
-      if (result.isConfirmed) {
-        const {status, message, data} = await clearPhotosFolder('interior', $order)
+    const choice = await confirmChoice('Yes, delete all interior photos!');
 
-        if (status === 'success') {
-          toast.push(message, toastThemes.success);
-          $order = data;
-        } else if (status === 'error') {
-          toast.push(message, toastThemes.error)
-        } else {
-          toast.push(message)
-        }
-      }
-    })
+    if (choice.isConfirmed){
+      const {status, message, data} = await clearPhotosFolder('interior', $order)
+      toastResults(status, message, () => { $order = data; })
+    }
   }
 </script>
 

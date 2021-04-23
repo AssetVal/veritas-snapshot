@@ -1,27 +1,26 @@
 <script lang="ts">
   import Swal from 'sweetalert2';
   import {Dashboard} from '@uppy/svelte';
-  import {toast} from '@zerodevx/svelte-toast';
-  import {order} from '../../../../stores/order';
-  import uppyInstance from '../_modules/uppyFactory';
   import {
     exteriorPhotoCategories,
     exteriorPhotoCategoriesForInteriorOrders,
     optionalPhotoCategories,
   } from '../_data/exteriorPhotoCategories';
-  import toastThemes from '../../../_modules/toastThemes';
+  import Order from '../../../../classes/Order';
+  import {order} from '../../../../stores/order';
+  import {vendor} from '../../../../stores/vendor';
+  import uppyInstance from '../_modules/uppyFactory';
+  import clearImage from '../../../_modules/clearImage';
+  import toastResults from '../../../_modules/toastResults';
   import type {VeritasResponse} from '../_modules/uppyFactory';
+  import Image from '../../../../components/layout/Image.svelte';
+  import confirmChoice from '../../../_modules/confirmationDialoge';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
-  import Image from '../../../../components/layout/Image.svelte';
-  import {vendor} from '../../../../stores/vendor';
-  import Order from '../../../../classes/Order';
-  import clearImage from '../../../_modules/clearImage';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
-  let uploadedCategories = [];
 
   if ($order.services.isInterior) {
     photoCategories = [
@@ -43,17 +42,10 @@
           const exteriorPhoto = result.successful[0];
           const {status, message, href}: VeritasResponse = exteriorPhoto.response.body;
 
-          if (status === 'success') {
-            toast.push(message, toastThemes.success);
+          toastResults(status, message, () => {
             $order.photos.exteriorFiles = [...$order.photos.exteriorFiles, {name: href as string, category: category}]
             $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
-            uploadedCategories = [...uploadedCategories, category]
-
-          } else if (status === 'error') {
-            toast.push(message, toastThemes.error)
-          } else {
-            toast.push(message)
-          }
+          })
         }
       }
     });
@@ -61,57 +53,29 @@
   }
 
   const clearPhoto = async(category: {id: string, text: string}) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: `Yes, delete the ${category.text}`
-    }).then(async(result) => {
-      if (result.isConfirmed) {
-        const {status, message, data} = await clearImage('exterior', $order, category.id)
+    const choice = await confirmChoice(`Yes, delete the ${category.text}`);
 
-        if (status === 'success') {
-          toast.push(message, toastThemes.success);
-          $order = data;
-          $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
-          uploadedCategories = uploadedCategories.filter(entry => entry !== category.id);
-        } else if (status === 'error') {
-          toast.push(message, toastThemes.error)
-        } else {
-          toast.push(message)
-        }
-      }
-    })
+    if (choice.isConfirmed){
+      const {status, message, data} = await clearImage('exterior', $order, category.id)
+
+      toastResults(status, message, () => {
+        $order = data;
+        $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+      })
+    }
   }
 
   const clearExteriorPhotos = async () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete all exterior photos!'
-    }).then(async(result) => {
-      if (result.isConfirmed) {
-        const {status, message, data} = await clearPhotosFolder('exterior', $order)
+    const choice = await confirmChoice('Yes, delete all exterior photos!');
 
-        if (status === 'success') {
-          toast.push(message, toastThemes.success);
-          $order = data;
-          $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
-          uploadedCategories = [];
-        } else if (status === 'error') {
-          toast.push(message, toastThemes.error)
-        } else {
-          toast.push(message)
-        }
-      }
-    })
+    if (choice.isConfirmed){
+      const {status, message, data} = await clearPhotosFolder('exterior', $order);
+
+      toastResults(status, message, () => {
+        $order = data;
+        $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+      });
+    }
   }
 </script>
 
@@ -135,8 +99,7 @@
         <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
           <div>&nbsp;</div>
           <span class="text-center ml-auto ">{category.text}</span>
-
-          {#if uploadedCategories.includes(category.id)}
+          {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length === 1}
             <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={clearPhoto(category)}>
               <TrashIcon classes="h-5 w-5"/>
             </div>
