@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Swal from 'sweetalert2';
   import uppyInstance from '../_modules/uppyFactory';
   import {Dashboard} from '@uppy/svelte';
   import {order} from '../../../../stores/order';
@@ -8,16 +9,28 @@
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
 
   const clearInteriorPhotos = async () => {
-    const {status, message, data} = await clearPhotosFolder('interior', $order)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete all interior photos!'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const {status, message, data} = await clearPhotosFolder('interior', $order)
 
-    if (status === 'success') {
-      toast.push(message, toastThemes.success);
-      $order = data;
-    } else if (status === 'error') {
-      toast.push(message, toastThemes.error)
-    } else {
-      toast.push(message)
-    }
+        if (status === 'success') {
+          toast.push(message, toastThemes.success);
+          $order = data;
+        } else if (status === 'error') {
+          toast.push(message, toastThemes.error)
+        } else {
+          toast.push(message)
+        }
+      }
+    })
   }
 </script>
 
@@ -36,7 +49,7 @@
 
 <div class="h-full grid grid-cols-1 gap-3">
   <Dashboard
-    uppy={uppyInstance(50, $order._id, 'None')}
+    uppy={uppyInstance(50, $order, 'None')}
     props={{
       inline: true,
       height: 300,
