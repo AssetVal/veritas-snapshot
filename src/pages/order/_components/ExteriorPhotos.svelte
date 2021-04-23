@@ -32,18 +32,17 @@
 
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     const uppy = uppyInstance(1, $order, category);
-
-    uppy.on('complete', async (result): Promise<void> => {
+    uppy.on('complete', async(result): Promise<void> => {
       console.log('successful files:', result.successful);
       console.log('failed files:', result.failed);
 
       if (result.successful.length > 0) {
-        if (result.successful.length === 1) { // Exterior Photo
+        if (result.successful.length === 1) {
           const exteriorPhoto = result.successful[0];
-          const {status, message, href}: VeritasResponse = exteriorPhoto.response.body;
+          const {status, message, data} = exteriorPhoto.response.body;
 
           toastResults(status, message, () => {
-            $order.photos.exteriorFiles = [...$order.photos.exteriorFiles, {name: href as string, category: category}]
+            $order = data;
             $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
           })
         }
@@ -113,7 +112,7 @@
         </div>
       </div>
       {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
-        <Image src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].name} alt="{category.text}"/>
+        <Image src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].href} alt="{category.text}"/>
       {:else}
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
