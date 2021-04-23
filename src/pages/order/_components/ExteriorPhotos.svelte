@@ -82,7 +82,7 @@
 <div class="h-full grid grid-cols-2 gap-3">
   {#each photoCategories as category, index}
     {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
-      <img src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id).name} alt="{category.text}">
+      <img src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].name} alt="{category.text}">
     {:else}
       <div>
         <div class="flex justify-center">
