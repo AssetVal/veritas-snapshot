@@ -19,6 +19,7 @@
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
   import * as ImageEditor from '@uppy/image-editor';
+  import editorExpanded from '../../../../stores/editor';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
 
@@ -33,6 +34,9 @@
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     const uppy = uppyInstance(1, $order, category);
 
+    uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true) });
+    uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false) });
+
 
     uppy.on('complete', async(result): Promise<void> => {
       console.log('successful files:', result.successful);
@@ -42,6 +46,8 @@
         if (result.successful.length === 1) {
           const exteriorPhoto = result.successful[0];
           const {status, message, data} = exteriorPhoto.response.body;
+
+          document.getElementById('previewImageHere').innerHTML = '';
 
           toastResults(status, message, () => {
             $order = data;
@@ -80,6 +86,12 @@
   }
 </script>
 
+<style>
+  .uppy-ImageCropper-controls {
+    bottom: unset !important;
+  }
+</style>
+
 <div class="flex f-row">
   <header class="mt-3 mb-1 p-0 block">
     <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2">
@@ -92,8 +104,6 @@
     </div>
   </div>
 </div>
-
-<div id="previewImageHere"> </div>
 
 <div class="h-full grid grid-cols-2 gap-2">
   {#each photoCategories as category, index}
@@ -121,7 +131,6 @@
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
           props={{
-            inline: true,
             height: 230,
             proudlyDisplayPoweredByUppy: false,
             plugins: ['ImageEditor']

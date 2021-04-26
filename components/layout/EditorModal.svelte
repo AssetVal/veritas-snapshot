@@ -1,7 +1,14 @@
 <script lang="ts">
-  export let expanded = false;
+  import editorExpanded from '../../stores/editor';
 </script>
 
-<div class={expanded ? 'block h-full w-full flex justify-center content-center' : 'hidden'} id="EditorModal">
+<style>
+  .z-top {
+    z-index: 999999999;
+  }
+</style>
+
+
+<div class={$editorExpanded ? 'block fixed h-full w-full flex justify-center content-center z-top -mt-8' : 'hidden'} id="EditorModal">
 
 </div>

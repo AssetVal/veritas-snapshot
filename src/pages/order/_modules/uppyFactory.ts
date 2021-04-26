@@ -27,7 +27,14 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
       bundle: true,
   });
 
-  uppy.use(ImageEditor, {quality: 0.8})
+  uppy.use(ImageEditor, {
+    target: '#EditorModal',
+    quality: 0.8,
+    actions: {
+      cropWidescreen: false,
+      cropWidescreenVertical: false,
+    }
+  });
 
   return uppy;
 }

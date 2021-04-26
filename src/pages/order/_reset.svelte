@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SvelteToast } from '@zerodevx/svelte-toast'
+  import {SvelteToast} from '@zerodevx/svelte-toast';
   import Sidebar from '../../../components/layout/Sidebar.svelte';
   import Header from '../../../components/layout/Header.svelte';
   import {vendor} from '../../../stores/vendor';
@@ -8,6 +8,7 @@
   import {order} from '../../../stores/order';
   import Order from '../../../classes/Order';
   import BackIcon from '../../../components/icons/BackIcon.svelte';
+  import EditorModal from '../../../components/layout/EditorModal.svelte';
 
   $order = $vendor?.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
 
@@ -49,6 +50,7 @@
     </div>
   </Header>
   <Sidebar bind:open={sidebarOpen}/>
+  <EditorModal />
   <main class="flex flex-col items-center min-h-full mt-8" on:click={() => sidebarOpen = false} id="editor">
     <div class="xl:w-2/5 lg:w-3/5 md:w-full sm:w-full px-4 py-6">
       <!-- routify:options preload="proximity" -->
