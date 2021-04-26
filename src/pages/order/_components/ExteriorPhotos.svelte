@@ -1,6 +1,6 @@
 <script lang="ts">
   import Swal from 'sweetalert2';
-  import {Dashboard} from '@uppy/svelte';
+  import { Dashboard } from '@uppy/svelte';
   import {
     exteriorPhotoCategories,
     exteriorPhotoCategoriesForInteriorOrders,
@@ -12,7 +12,6 @@
   import uppyInstance from '../_modules/uppyFactory';
   import clearImage from '../../../_modules/clearImage';
   import toastResults from '../../../_modules/toastResults';
-  import type {VeritasResponse} from '../_modules/uppyFactory';
   import Image from '../../../../components/layout/Image.svelte';
   import confirmChoice from '../../../_modules/confirmationDialoge';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
@@ -93,6 +92,8 @@
     </div>
   </div>
 </div>
+
+<div id="previewImageHere"> </div>
 
 <div class="h-full grid grid-cols-2 gap-2">
   {#each photoCategories as category, index}
