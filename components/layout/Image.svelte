@@ -1,7 +1,7 @@
 <script type="ts">
   export let src;
   export let alt;
-  export let caption = ''
+  export let caption = ''; // Caption is optional so set it to blank
 
   let expanded = false;
 
@@ -103,6 +103,5 @@
     <img class="modal-content" {src} {alt}>
   {/if}
 
-  <!-- Modal Caption (Image Text) -->
   <div class="caption">{caption}</div>
 </div>
