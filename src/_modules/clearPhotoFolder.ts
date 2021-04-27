@@ -1,5 +1,3 @@
-import type Order from '../../classes/Order';
-
 /**
  * | Prop | Value |
  * |----|----|
@@ -18,7 +16,7 @@ export interface fetchResult {
  * @param intOrExt
  * @param order
  */
-export default async function clearPhotosFolder(intOrExt: 'interior'|'exterior', order: Order): Promise<fetchResult> {
+export default async function clearPhotosFolder(intOrExt: 'interior' | 'exterior', order: any): Promise<fetchResult> {
   try {
     const response = await fetch(`https://www.assetval.club/api/snapshotClearImages/${order._id}/${intOrExt}`, {
       method: 'POST',
