@@ -47,8 +47,6 @@
           const exteriorPhoto = result.successful[0];
           const {status, message, data} = exteriorPhoto.response.body;
 
-          document.getElementById('previewImageHere').innerHTML = '';
-
           toastResults(status, message, () => {
             $order = data;
             $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
@@ -85,12 +83,6 @@
     }
   }
 </script>
-
-<style>
-  .uppy-ImageCropper-controls {
-    bottom: unset !important;
-  }
-</style>
 
 <div class="flex f-row">
   <header class="mt-3 mb-1 p-0 block">
