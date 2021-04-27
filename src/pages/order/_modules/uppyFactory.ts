@@ -10,15 +10,29 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
   const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
     autoProceed: false, // Automatically upload when the photo is chosen
     id: imageCategory, // Create separate ID's so Uppy can use local storage easier
-    onBeforeFileAdded(currentFile, files) {
-      if (currentFile.name.length > 5){
+    // @ts-ignore - Strict Uppy doesn't like me setting new metadata this way (but it works)
+    onBeforeFileAdded(currentFile) {
+      if (currentFile.name.length > 5){ // Return a new object so we don't mutate the original
         return { // Reduce file name so the mobile phone users can easily see the edit button
           ...currentFile,
-          name: currentFile.name.substr(0, 5)
+          meta: {
+            originalName: currentFile.name,
+          },
+          name: imageCategory,
         }
       } else {
         return currentFile;
       }
+    },
+    onBeforeUpload(files){
+      const updatedFiles = {}
+      Object.keys(files).forEach(fileID => {
+        updatedFiles[fileID] = {
+          ...files[fileID], // @ts-ignore
+          name: files[fileID].meta.originalName,
+        }
+      })
+      return updatedFiles
     },
     restrictions: {
       maxFileSize: 100000000,
