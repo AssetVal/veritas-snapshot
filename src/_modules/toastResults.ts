@@ -1,7 +1,6 @@
 import toastThemes from './toastThemes';
 import {toast} from '@zerodevx/svelte-toast';
 
-
 export const toastResults = (status: 'success'|'error'|'failure', message: string, successFn: Function|null = null) => {
   if (status === 'success') {
     toast.push(message, toastThemes.success);

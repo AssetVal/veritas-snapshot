@@ -4,17 +4,10 @@ import ImageEditor from '@uppy/image-editor';
 import type Order from '../../../../classes/Order';
 import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
 
-export interface VeritasResponse {
-  message: string,
-  status: 'success'|'error',
-  href: string|Array<string>
-}
-
-export default function uppyInstance(maxPhotos: number, order: Order, imageCategory: photoCategoryIDs){
+export default function uppyInstance(maxPhotos: number, order: Order, imageCategory: photoCategoryIDs): Uppy.Uppy<Uppy.StrictTypes> {
   const intExt = (maxPhotos > 1) ? 'interior' : 'exterior';
 
-  // @ts-ignore
-  const uppy = new Uppy({
+  const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
     autoProceed: false,
     restrictions: {
       maxFileSize: 10000000,
@@ -31,6 +24,12 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
     target: '#EditorModal',
     quality: 0.8,
     actions: {
+      revert: true,
+      rotate: true,
+      flip: true,
+      zoomIn: true,
+      zoomOut: true,
+      cropSquare: true,
       cropWidescreen: false,
       cropWidescreenVertical: false,
     }
