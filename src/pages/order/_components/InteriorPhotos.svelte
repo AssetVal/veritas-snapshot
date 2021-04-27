@@ -58,6 +58,7 @@
       inline: true,
       height: 300,
       proudlyDisplayPoweredByUppy: false,
+      plugins: ['ImageEditor']
     }}
   />
 </div>
