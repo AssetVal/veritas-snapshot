@@ -121,7 +121,7 @@
         <div class="rounded-md bg-blue-primary-dark text-white w-full flex flex-row justify-center">
           <div>&nbsp;</div>
           <span class="text-center ml-auto ">{category.text}</span>
-          {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length === 1}
+          {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
             <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={clearPhoto(category)}>
               <TrashIcon classes="h-5 w-5"/>
             </div>
