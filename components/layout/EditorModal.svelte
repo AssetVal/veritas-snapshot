@@ -3,9 +3,8 @@
 </script>
 
 <style>
-  .z-top {
-    z-index: 999999999;
-  }
+  /* This just makes sure the modal appears above everything */
+  .z-top { z-index: 999999999; }
 </style>
 
 
