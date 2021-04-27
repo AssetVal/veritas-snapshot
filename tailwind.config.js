@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
 const production = !process.env.ROLLUP_WATCH;
 
@@ -36,6 +37,14 @@ module.exports = {
     enabled: production,
   },
   theme: {
+    screens: {
+      '5xs': '240px', // Galaxy Fold (280px)
+      '4xs': '300px', // iPhone 5 (320px)
+      '3xs': '360px', // Galaxy S (360px)
+      '2xs': '420px', // IPhone 6/7/8/X (375px), Samsung S7 (414px)
+      'xs': '475px',
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         dark: {

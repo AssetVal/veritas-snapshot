@@ -56,7 +56,7 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
       flip: true,
       zoomIn: true,
       zoomOut: true,
-      cropSquare: true,
+      cropSquare: false,
       cropWidescreen: false,
       cropWidescreenVertical: false,
     }
