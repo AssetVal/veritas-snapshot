@@ -97,7 +97,7 @@
   </div>
 </div>
 
-<div class="h-full grid grid-cols-2 gap-2">
+<div class="h-full grid grid-cols-1 xs:grid-cols-2 gap-2">
   {#each photoCategories as category, index}
     <div class="h-2/3">
       <div class="flex justify-center">
