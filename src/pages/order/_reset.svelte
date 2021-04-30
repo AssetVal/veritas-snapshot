@@ -9,6 +9,9 @@
   import Order from '../../../classes/Order';
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
+  import { ready } from '@roxi/routify'
+
+  $ready()
 
   $order = $vendor?.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
 
