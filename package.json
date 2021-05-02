@@ -52,7 +52,7 @@
       "rollup-plugin-workbox": "^6.1.1",
       "spank": "^1.5.1",
       "spassr": "^2.6.0",
-      "svelte": "^3.37.0",
+      "svelte": "^3.38.1",
       "svelte-check": "^1.5.2",
       "svelte-popperjs": "^1.2.3",
       "svelte-preprocess": "^4.7.2",
@@ -76,6 +76,6 @@
       "@uppy/svelte": "^0.1.7",
       "@uppy/webcam": "^1.8.8",
       "@uppy/xhr-upload": "^1.7.2",
-      "sweetalert2": "^10.16.6"
+      "sweetalert2": "^10.16.7"
    }
 }
