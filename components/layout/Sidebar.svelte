@@ -5,6 +5,7 @@
   import HomeIcon from '../icons/HomeIcon.svelte';
   import CogIcon from '../icons/CogIcon.svelte';
   import LogOutIcon from '../icons/LogOutIcon.svelte';
+  import Vendor from '../../classes/Vendor';
 
   export let open = false;
   let classes;
@@ -18,7 +19,7 @@
   }
 
   function logout() {
-    $vendor = null;
+    $vendor = new Vendor();
     $goto(window.location.href);
   }
 
