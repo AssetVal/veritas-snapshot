@@ -6,10 +6,10 @@
 
   let sidebarOpen = false;
 
-  $: if (!$vendor) $goto("./login", {}, true);
+  $: if ($vendor._id === 'noUser') $goto("./login", {}, true);
 </script>
 
-{#if $vendor}
+{#if $vendor._id !== 'noUser'}
   <Header bind:sidebar={sidebarOpen}/>
   <Sidebar bind:open={sidebarOpen}/>
   <main class="flex flex-col items-center min-h-full mt-8" on:click={() => sidebarOpen = false}>
