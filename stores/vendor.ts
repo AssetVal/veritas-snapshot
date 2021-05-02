@@ -1,21 +1,7 @@
-import {writable} from 'svelte/store';
+import persistentWritable from './modules/persistentWritable';
+import type {Writable} from 'svelte/store';
+import Vendor from '../classes/Vendor';
 
-const localStore = (key: string, value: any) => {
-  const {subscribe, set} = writable(value);
+export const vendor: Writable<Vendor> = persistentWritable('vendor', new Vendor())
 
-  return {
-    subscribe,
-    set,
-    useLocalStorage: () => {
-      const json = localStorage.getItem(key);
-      if (json) set(JSON.parse(json));
-      subscribe(current => {
-        localStorage.setItem(key, JSON.stringify(current));
-      })
-    }
-  }
-}
-
-export const vendor = localStore('vendor', false)
-
-vendor.useLocalStorage();
+export default vendor;
