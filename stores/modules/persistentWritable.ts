@@ -1,0 +1,37 @@
+import { writable, get } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+
+declare type Updater<T> = (value: T) => T;
+
+/**
+ * A Local Store based writable store, that persist after visit.
+ * @param key
+ * @param initialValue
+ */
+export default function persistentWritable<T>(key: string, initialValue: T): Writable<T> {
+  const store = writable(initialValue);
+  const {subscribe, set} = store;
+  const json = typeof(localStorage) != 'undefined' ? localStorage.getItem(key) : null;
+
+  if (json) set(<T> JSON.parse(json));
+
+  function updateStorage(key: string, value: T) {
+    if (typeof(localStorage) == 'undefined') return;
+
+    localStorage.setItem(key, JSON.stringify(value))
+  }
+
+  return {
+    set(value: T) {
+      updateStorage(key, value)
+      set(value)
+    },
+    update(updater: Updater<T>) {
+      const value = updater(get(store));
+
+      updateStorage(key, value);
+      set(value)
+    },
+    subscribe
+  }
+}
