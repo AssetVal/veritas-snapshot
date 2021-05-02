@@ -190,5 +190,9 @@ export class Vendor extends BaseVendor {
     completed: Array<Order>,
   };
   licenses: LicenseStack;
+  constructor(id: string = 'noUser') { // Default to noUser if initialized without assignment
+    super()
+    this._id = id;
+  }
 }
 export default Vendor;
