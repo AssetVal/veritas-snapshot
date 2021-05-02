@@ -116,7 +116,7 @@ export interface iVendor extends IBaseVendor {
 }
 
 export class Vendor extends BaseVendor {
-  _id: any
+  _id: string
   snapshotPreferences: {
     preferredMapApp: 'Google Maps'|'Waze',
     pushNotifications: boolean,

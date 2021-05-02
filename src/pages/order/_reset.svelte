@@ -11,21 +11,20 @@
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
 
-
   $ready()
 
   $order = $vendor.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
 
   let sidebarOpen = false;
 
-  $: if (!$vendor) $goto('../login', {}, true);
+  $: if (!$vendor._id === 'noUser') $goto('../login', {}, true);
 </script>
 
 <style>
   .h-fit {height: fit-content}
 </style>
 
-{#if $vendor}
+{#if $vendor._id !== 'noUser'}
   <SvelteToast />
   <Header bind:sidebar={sidebarOpen}>
     <div class="flex flex-row justify-between w-full" slot="infoArea">
