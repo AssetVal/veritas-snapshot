@@ -14,7 +14,7 @@
 
   $ready()
 
-  $order = $vendor?.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
+  $order = $vendor.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
 
   let sidebarOpen = false;
 
@@ -32,17 +32,17 @@
       <div class="bg-dark-transparent flex flex-col px-3 -ml-2 h-full opacity-90">
         {#if $order.address.street}
         <span class="text-xl text-white opacity-100">
-          {$order.address.street}{#if $order?.address.unitNumber}, {$order?.address.unitNumber}{/if}
+          {$order.address.street}{#if $order.address?.unitNumber}, {$order.address.unitNumber}{/if}
         </span>
         {/if}
         {#if $order.address.city}
           <small class="text-lg text-white">
-            {$order.address.city}, {$order?.address.state}, {$order?.address.zip}
+            {$order.address.city}, {$order.address.state}, {$order.address.zip}
           </small>
         {/if}
       </div>
       <div
-        class="bg-dark-transparent rounded-full h-fit my-auto mr-4"
+        class="bg-dark-transparent rounded-full h-fit my-auto mr-4 cursor-pointer"
         on:click={() => $goto('/')}
       >
         <BackIcon
