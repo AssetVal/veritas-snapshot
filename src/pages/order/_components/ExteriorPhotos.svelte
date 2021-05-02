@@ -34,8 +34,6 @@
     ].sort(({order: a}, {order: b}) => a - b);
   }
 
-  if ($order.)
-
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     // Create a new Uppy instance
     const uppy = uppyInstance(1, $order, category);
