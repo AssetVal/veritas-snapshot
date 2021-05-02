@@ -1,15 +1,16 @@
 <script lang="ts">
-  import {SvelteToast} from '@zerodevx/svelte-toast';
-  import Sidebar from '../../../components/layout/Sidebar.svelte';
-  import Header from '../../../components/layout/Header.svelte';
-  import {vendor} from '../../../stores/vendor';
   import {goto} from '@roxi/routify';
   import {params} from '@roxi/routify';
-  import {order} from '../../../stores/order';
+  import { ready } from '@roxi/routify';
   import Order from '../../../classes/Order';
+  import {order} from '../../../stores/order';
+  import {vendor} from '../../../stores/vendor';
+  import {SvelteToast} from '@zerodevx/svelte-toast';
+  import Header from '../../../components/layout/Header.svelte';
+  import Sidebar from '../../../components/layout/Sidebar.svelte';
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
-  import { ready } from '@roxi/routify'
+
 
   $ready()
 

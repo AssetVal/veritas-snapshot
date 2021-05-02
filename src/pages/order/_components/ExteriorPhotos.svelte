@@ -9,19 +9,19 @@
   import Order from '../../../../classes/Order';
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
+  import * as ImageEditor from '@uppy/image-editor';
   import uppyInstance from '../_modules/uppyFactory';
   import clearImage from '../../../_modules/clearImage';
+  import editorExpanded from '../../../../stores/editor';
   import toastResults from '../../../_modules/toastResults';
+  import postToVeritas from '../../../_modules/postToVeritas';
   import Image from '../../../../components/layout/Image.svelte';
   import confirmChoice from '../../../_modules/confirmationDialoge';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
   import HelpIcon from '../../../../components/icons/HelpIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
-  import * as ImageEditor from '@uppy/image-editor';
-  import editorExpanded from '../../../../stores/editor';
   import RefreshIcon from '../../../../components/icons/RefreshIcon.svelte';
-  import postToVeritas from '../../../_modules/postToVeritas';
 
   let photoCategories = [...exteriorPhotoCategories, ...optionalPhotoCategories];
   let mobileColumn = 'one';
@@ -34,29 +34,25 @@
     ].sort(({order: a}, {order: b}) => a - b);
   }
 
+  if ($order.)
+
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
+    // Create a new Uppy instance
     const uppy = uppyInstance(1, $order, category);
-
-    uppy.on('file-editor:start', () => {
-      editorExpanded.update(n => n = true);
-    });
-    uppy.on('file-editor:complete', () => {
-      editorExpanded.update(n => n = false);
-    });
+    // If they open the photo editor, expand our editor modal
+    uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
+    // When they finish or close editing, close the editor modal
+    uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false); });
+    // On finish upload look for success
     uppy.on('complete', async (result): Promise<void> => {
-      console.log('successful files:', result.successful);
-      console.log('failed files:', result.failed);
-
       if (result.successful.length > 0) {
-        if (result.successful.length === 1) {
-          const exteriorPhoto = result.successful[0];
-          const {status, message, data} = exteriorPhoto.response.body;
+        const exteriorPhoto = result.successful[0];
+        const {status, message, data} = exteriorPhoto.response.body;
 
-          toastResults(status, message, () => {
-            $order = data;
-            $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
-          });
-        }
+        toastResults(status, message, () => {
+          $order = data;
+          $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+        });
       }
     });
     return uppy;
