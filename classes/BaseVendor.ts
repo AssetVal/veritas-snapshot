@@ -145,7 +145,4 @@ export default abstract class BaseVendor implements IBaseVendor {
   female: boolean;
   male: boolean;
   plainPhone: string;
-  protected constructor(vendor: IBaseVendor) {
-    Object.assign(this, vendor);
-  }
 }
