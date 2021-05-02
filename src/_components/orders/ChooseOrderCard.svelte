@@ -19,7 +19,7 @@
   }
 
   function openDirections(){
-    if ($vendor?.preferredMapApp === 'Waze'){
+    if ($vendor.snapshotPreferences.preferredMapApp === 'Waze'){
       window.open(`https://waze.com/ul?q=${encodeURI(`${street} ${order.address.city} ${order.address.state}`)}`)
     } else {
       window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeGoogleURL(`${street} ${order.address.city} ${order.address.state}`)}`)
