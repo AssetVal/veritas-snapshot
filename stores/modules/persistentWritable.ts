@@ -20,19 +20,18 @@ export default function persistentWritable<T>(key: string, initialValue: T): Wri
 
   function updateStorage(key: string, value: T): void {
     if (typeof(localStorage) == 'undefined') return;
-
     localStorage.setItem(key, JSON.stringify(value))
   }
 
   return {
     set(value: T): void {
-      updateStorage(key, value)
-      set(value)
+      updateStorage(key, value);
+      set(value);
     },
     update(updater: Updater<T>): void {
       const value: T = updater(get(store));
       updateStorage(key, value);
-      set(value)
+      set(value);
     },
     subscribe
   }
