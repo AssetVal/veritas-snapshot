@@ -114,7 +114,7 @@
   </div>
 </div>
 
-<div class={mobileColumn === 'one' ? "h-full grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2" : "h-full grid grid-cols-2 gap-2"}>
+<div class={mobileColumn === 'one' ? "h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2" : "h-full grid grid-cols-2 gap-2"}>
   {#each photoCategories as category, index}
     <div class="h-2/3">
       <div class="flex justify-center">

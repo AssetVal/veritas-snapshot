@@ -32,9 +32,7 @@
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
   }
 
-  .hidden {
-    display: none
-  }
+  .hidden { display: none }
 
   /* Modal Content (Image) */
   .modal-content {
