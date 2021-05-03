@@ -89,6 +89,7 @@ export declare interface iOrder {
     secondOpinionBPO?: boolean,
     highPriority?: boolean,
     double?: boolean
+    extendedExteriorPhotos?: boolean,
   },
   props?: {
     attached?: boolean
@@ -302,7 +303,8 @@ export class Order implements iOrder {
     isInterior: boolean,
     secondOpinionBPO: boolean,
     highPriority: boolean,
-    double: boolean
+    double: boolean,
+    extendedExteriorPhotos: boolean,
   };
   public props: {
     attached: boolean,
@@ -493,6 +495,7 @@ export class Order implements iOrder {
         secondOpinionBPO: orderData?.services?.secondOpinionBPO ?? null,
         highPriority: orderData?.services?.highPriority ?? null,
         double: orderData?.services?.double ?? null,
+        extendedExteriorPhotos: orderData?.services?.extendedExteriorPhotos,
       };
       this.props = {
         attached: orderData?.props?.attached ?? null,
