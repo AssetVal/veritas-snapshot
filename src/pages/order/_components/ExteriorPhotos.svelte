@@ -30,6 +30,12 @@
     photoCategories = [
       ...exteriorPhotoCategories,
       ...exteriorPhotoCategoriesForInteriorOrders,
+    ].sort(({order: a}, {order: b}) => a - b);
+  }
+
+  if ($order.services.extendedExteriorPhotos) {
+    photoCategories = [
+      ...photoCategories,
       ...optionalPhotoCategories
     ].sort(({order: a}, {order: b}) => a - b);
   }
