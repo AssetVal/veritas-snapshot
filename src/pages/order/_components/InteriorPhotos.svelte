@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<div class="h-full grid grid-cols-1 gap-3">
+<div class="h-full flex justify-center">
   <Dashboard
     uppy={uppy}
     props={{
