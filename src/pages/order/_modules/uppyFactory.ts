@@ -2,15 +2,16 @@ import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import ImageEditor from '@uppy/image-editor';
 import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
+import type Order from '../../../../classes/Order';
 
-export default function uppyInstance(maxPhotos: number, order: any, imageCategory: photoCategoryIDs|'None' = 'None'): Uppy.Uppy<Uppy.StrictTypes> {
+export default function uppyInstance(maxPhotos: number, order: Order, imageCategory: photoCategoryIDs|'None' = 'None'): Uppy.Uppy<Uppy.StrictTypes> {
   const intExt = (maxPhotos > 1) ? 'interior' : 'exterior';
 
   const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
     autoProceed: false,
     // Create separate ID's so Uppy can use local storage easier
     id: (imageCategory === 'None') ? 'InteriorPhotos' : imageCategory,
-    // @ts-ignore - Strict Uppy doesn't like me setting new metadata this way (but it works)
+    // @ts-ignore - Uppys "Strict Typescript" mode doesn't like me setting new metadata this way (but it works)
     onBeforeFileAdded(currentFile) {
       if (currentFile.name.length > 5 && imageCategory !== 'None'){ // Return a new object so we don't mutate the original
         return { // Reduce file name so the mobile phone users can easily see the edit button
@@ -25,6 +26,7 @@ export default function uppyInstance(maxPhotos: number, order: any, imageCategor
       }
     },
     onBeforeUpload(files){
+      if (imageCategory === 'None') return files;
       const updatedFiles = {}
       Object.keys(files).forEach(fileID => {
         updatedFiles[fileID] = {
