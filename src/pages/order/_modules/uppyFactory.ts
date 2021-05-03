@@ -3,7 +3,7 @@ import XHRUpload from '@uppy/xhr-upload';
 import ImageEditor from '@uppy/image-editor';
 import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
 
-export default function uppyInstance(maxPhotos: number, order: any, imageCategory: photoCategoryIDs|'None'): Uppy.Uppy<Uppy.StrictTypes> {
+export default function uppyInstance(maxPhotos: number, order: any, imageCategory: photoCategoryIDs|'None' = 'None'): Uppy.Uppy<Uppy.StrictTypes> {
   const intExt = (maxPhotos > 1) ? 'interior' : 'exterior';
 
   const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
