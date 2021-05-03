@@ -55,7 +55,7 @@
   <Sidebar bind:open={sidebarOpen}/>
   <EditorModal />
   <main class="flex flex-col items-center min-h-full mt-8" on:click={() => sidebarOpen = false}>
-    <div class="lg:w-3/5 sm:w-full px-4 py-6">
+    <div class="lg:w-3/5 w-full px-4 py-6">
       <!-- routify:options preload="proximity" -->
       <slot/>
     </div>
