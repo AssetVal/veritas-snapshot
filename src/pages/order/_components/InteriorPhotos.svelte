@@ -4,19 +4,21 @@
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
   import uppyInstance from '../_modules/uppyFactory';
+  import InteriorHeader from './InteriorHeader.svelte';
   import editorExpanded from '../../../../stores/editor';
   import toastResults from '../../../_modules/toastResults';
-  import confirmChoice from '../../../_modules/confirmationDialoge';
-  import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
-  import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import Image from '../../../../components/layout/Image.svelte';
 
   // Create a new Uppy instance
   const uppy = uppyInstance(50, $order);
   // If they open the photo editor, expand our editor modal
-  uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
+  uppy.on('file-editor:start', () => {
+    editorExpanded.update(n => n = true);
+  });
   // When they finish or close editing, close the editor modal
-  uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false); });
+  uppy.on('file-editor:complete', () => {
+    editorExpanded.update(n => n = false);
+  });
   // On finish upload look for success
   uppy.on('complete', async (result): Promise<void> => {
     console.log('successful files:', result.successful);
@@ -32,29 +34,9 @@
       });
     }
   });
-
-  const clearInteriorPhotos = async () => {
-    const choice = await confirmChoice('Yes, delete all interior photos!');
-
-    if (choice.isConfirmed) {
-      const {status, message, data} = await clearPhotosFolder('interior', $order);
-      toastResults(status, message, () => {
-        $order = data;
-      });
-    }
-  };
 </script>
 
-<div class="flex f-row">
-  <header class="mt-3 mb-1 p-0 block">
-    <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2"> Interior Photos </h1>
-  </header>
-  <div class="ml-auto flex items-center">
-    <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer" on:click={clearInteriorPhotos}>
-      <TrashIcon height="1.4rem" width="1.4rem" />
-    </div>
-  </div>
-</div>
+<InteriorHeader />
 
 {#if $order.photos.interiorFiles.length > 0}
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
