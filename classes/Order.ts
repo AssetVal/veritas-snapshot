@@ -23,10 +23,12 @@ export declare interface iOrder {
   project?: Project,
   photos?: {
     exteriorFiles?: Array<{
+      href?: string,
       name: string,
       category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum' | photoCategoryIDs
     }>,
     interiorFiles?: Array<{
+      href?: string,
       name: string,
       note: string,
     }>,
@@ -223,11 +225,13 @@ export class Order implements iOrder {
   };
   public photos?: {
     exteriorFiles?: Array<{
+      href?: string,
       _id?: string;
       name: string,
       category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum'| photoCategoryIDs
     }>,
     interiorFiles?: Array<{
+      href?: string,
       _id?: string;
       name: string,
       note: string,
