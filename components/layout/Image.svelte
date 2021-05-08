@@ -11,7 +11,7 @@
 <style>
   /* Style the Image Used to Trigger the Modal */
   .img {
-    border-radius: 5px;
+    border-radius: 1px;
     cursor: pointer;
     transition: 0.3s;
   }
