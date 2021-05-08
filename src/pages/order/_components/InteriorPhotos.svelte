@@ -57,8 +57,7 @@
       <ImageCard>
         <Image src={photo.href} slot="img" />
         <form slot="content" on:submit={saveInteriorRoom}>
-          <Input label="Room" />
-          <button type="submit">Save</button>
+          <Input label="What room is this?" />
         </form>
       </ImageCard>
     {/each}
