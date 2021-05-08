@@ -1,4 +1,5 @@
 <script>
+  import NarrowBackIcon from '../../../../components/icons/NarrowBackIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import PlusIcon from '../../../../components/icons/PlusIcon.svelte';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
@@ -29,6 +30,10 @@
     {#if $order.photos.interiorFiles.length > 0 && !$extraPhotos}
       <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer mr-2" on:click={() => extraPhotos.update(n => n = true)}>
         <PlusIcon height="1.4rem" width="1.4rem" />
+      </div>
+    {:else}
+      <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer mr-2" on:click={() => extraPhotos.update(n => n = false)}>
+        <NarrowBackIcon height="1.4rem" width="1.4rem" />
       </div>
     {/if}
     <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer" on:click={clearInteriorPhotos}>
