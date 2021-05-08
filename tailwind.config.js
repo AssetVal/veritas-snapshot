@@ -56,6 +56,7 @@ module.exports = {
         },
         blue: {
           primary: '#105f9e',
+          secondary: '#86b7fe',
           'primary-dark': '#1a3e5b',
           450: '#105f9e',
           550: '#1b5f9e',
