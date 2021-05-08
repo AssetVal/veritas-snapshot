@@ -28,7 +28,6 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
   }
 
@@ -36,7 +35,7 @@
 
   /* Modal Content (Image) */
   .modal-content {
-    margin: auto;
+    margin: 1rem auto auto;
     display: block;
     width: 80%;
     max-width: 700px;
@@ -55,7 +54,8 @@
   }
 
   /* Add Animation - Zoom in the Modal */
-  .modal-content, .caption {
+  .modal-content,
+  .caption {
     animation-name: zoom;
     animation-duration: 0.6s;
   }
