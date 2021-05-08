@@ -9,6 +9,8 @@
   import extraPhotos from '../../../../stores/extraPhotos';
   import toastResults from '../../../_modules/toastResults';
   import Image from '../../../../components/layout/Image.svelte';
+  import ImageCard from '../../../../components/layout/ImageCard.svelte';
+  import Input from '../../../_components/layout/Input.svelte';
 
   const interiorUppy = () => {
     // Create a new Uppy instance
@@ -39,6 +41,12 @@
     });
     return uppy;
   }
+
+  const saveInteriorRoom = (event) => {
+    event.preventDefault();
+
+    console.log(event.currentTarget.querySelector('input').value)
+  }
 </script>
 
 <InteriorHeader />
@@ -46,7 +54,13 @@
 {#if $order.photos.interiorFiles.length > 0}
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
     {#each $order.photos.interiorFiles as photo}
-      <Image src={photo.href} />
+      <ImageCard>
+        <Image src={photo.href} slot="img" />
+        <form slot="content" on:submit={saveInteriorRoom}>
+          <Input label="Room" />
+          <button type="submit">Save</button>
+        </form>
+      </ImageCard>
     {/each}
   </div>
 {:else} <!-- No interior photos uploaded yet so show uppy -->
@@ -63,6 +77,7 @@
   </div>
 {/if}
 
+<!-- extraPhotos is triggered when they add more photos to interior -->
 {#if $extraPhotos}
   <div class="h-full flex justify-center mt-4">
     <Dashboard
