@@ -29,11 +29,12 @@
       "validate": "svelte-check"
    },
    "devDependencies": {
-      "@rollup/plugin-commonjs": "^18.1.0",
-      "@rollup/plugin-node-resolve": "^11.2.1",
+      "@rollup/plugin-commonjs": "^19.0.0",
+      "@rollup/plugin-node-resolve": "^13.0.0",
       "@rollup/plugin-typescript": "^8.2.1",
-      "@roxi/routify": "^2.17.2",
+      "@roxi/routify": "^2.18.0",
       "@tsconfig/svelte": "^1.0.0",
+      "@types/uuid": "^8.3.0",
       "@zerodevx/svelte-toast": "^0.3.0",
       "autoprefixer": "^10.2.5",
       "cross-env": "^7.0.2",
@@ -41,7 +42,7 @@
       "fs-extra": "^10.0.0",
       "nollup": "^0.16.3",
       "npm-run-all": "^4.1.5",
-      "postcss": "^8.2.12",
+      "postcss": "^8.2.14",
       "postcss-import": "^14.0.1",
       "rollup": "^2.47.0",
       "rollup-plugin-hot": "^0.1.1",
@@ -54,7 +55,7 @@
       "spassr": "^2.6.0",
       "svelte": "^3.38.2",
       "svelte-check": "^1.5.2",
-      "svelte-popperjs": "^1.2.3",
+      "svelte-popperjs": "^1.2.5",
       "svelte-preprocess": "^4.7.3",
       "tailwindcss": "^2.1.2",
       "tossr": "^1.3.1",
@@ -71,11 +72,12 @@
       ]
    },
    "dependencies": {
-      "@uppy/core": "^1.17.0",
+      "@uppy/core": "^1.18.0",
       "@uppy/image-editor": "^0.2.4",
-      "@uppy/svelte": "^0.1.7",
-      "@uppy/webcam": "^1.8.8",
+      "@uppy/svelte": "^0.1.8",
+      "@uppy/webcam": "^1.8.9",
       "@uppy/xhr-upload": "^1.7.2",
-      "sweetalert2": "^10.16.7"
+      "sweetalert2": "^10.16.7",
+      "uuid": "^8.3.2"
    }
 }
