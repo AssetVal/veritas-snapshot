@@ -58,7 +58,7 @@
     const {message, status, data} = await postToVeritas('snapshotInteriorSave', {
       interiorFiles: JSON.stringify(interiorPhotos),
       vendorID: $vendor._id,
-      order: $order._id
+      orderID: $order._id
     });
 
     console.log({message, status, data})
