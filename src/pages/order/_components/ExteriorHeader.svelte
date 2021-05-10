@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CheckmarkIcon from '../../../../components/icons/CheckmarkIcon.svelte';
   import RefreshIcon from '../../../../components/icons/RefreshIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
@@ -8,6 +9,8 @@
   import {vendor} from '../../../../stores/vendor';
   import {order} from '../../../../stores/order';
   import Order from '../../../../classes/Order';
+
+  export let categories;
 
   const clearExteriorPhotos = async () => {
     const choice = await confirmChoice('Yes, delete all exterior photos!');
@@ -22,19 +25,22 @@
     }
   };
 
-  const refreshOrder = async() => {
+  const refreshOrder = async () => {
     const {status, message, data} = await postToVeritas(`/snapshotRefreshOrder/${$order._id}`, {});
 
     toastResults(status, message, () => {
       $order = data;
       $vendor.orders.inProgress = [...$vendor.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
     });
-  }
+  };
 </script>
 
 <div class="flex f-row">
-  <header class="mt-3 mb-1 p-0 block">
+  <header class="mt-3 mb-1 p-0 block flex items-center">
     <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2"> Exterior Photos </h1>
+    {#if $order.photos.exteriorFiles.length === categories.length}
+      <CheckmarkIcon height="2rem" width="2rem" classes="text-green-600 mb-2 ml-2" />
+    {/if}
   </header>
   <div class="ml-auto flex items-center">
     <div class="rounded-full bg-dark-transparent h-8 w-8 flex items-center justify-center cursor-pointer mr-2" on:click={refreshOrder}>
