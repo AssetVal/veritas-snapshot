@@ -37,9 +37,13 @@
     // Create a new Uppy instance
     const uppy = uppyInstance(1, $order, category);
     // If they open the photo editor, expand our editor modal
-    uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
+    uppy.on('file-editor:start', () => {
+      editorExpanded.update(n => n = true);
+    });
     // When they finish or close editing, close the editor modal
-    uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false); });
+    uppy.on('file-editor:complete', () => {
+      editorExpanded.update(n => n = false);
+    });
     // On finish upload look for success
     uppy.on('complete', async (result): Promise<void> => {
       if (result.successful.length > 0) {
@@ -56,7 +60,7 @@
   };
 </script>
 
-<ExteriorHeader />
+<ExteriorHeader categories={photoCategories} />
 <div class="h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
   {#each photoCategories as category, index}
     <div class="h-2/3">
