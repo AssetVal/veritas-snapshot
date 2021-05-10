@@ -14,7 +14,6 @@
     logInToVeritas(email, password).then(response => {
       if (response.status === 'success'){
         $vendor = {...response.data};
-        console.log($vendor);
 
         /** We want to $goto our current location.
          *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
