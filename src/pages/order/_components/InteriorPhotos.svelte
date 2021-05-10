@@ -26,9 +26,6 @@
     });
     // On finish upload look for success
     uppy.on('complete', async (result): Promise<void> => {
-      console.log('successful files:', result.successful);
-      console.log('failed files:', result.failed);
-
       if (result.successful.length > 0) {
         extraPhotos.update(n => n = false)
         const interiorPhotos = result.successful;
@@ -61,8 +58,6 @@
       orderID: $order._id
     });
 
-    console.log({message, status, data})
-
     toastResults(status, message, () => {
       $order = data;
       $vendor.orders.inProgress = [...$vendor.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
@@ -80,7 +75,7 @@
         <ImageCard>
           <Image src={photo.href} slot="img" />
           <div slot="content">
-            <Input label="What room is this?" id={photo.name} />
+            <Input label="What room is this?" id={photo.name} value={photo.note} />
           </div>
         </ImageCard>
       {/each}
