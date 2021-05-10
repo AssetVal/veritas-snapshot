@@ -41,33 +41,44 @@
     });
     return uppy;
   }
+
+  const submitOrder = (event) => {
+    event.preventDefault();
+
+    console.log(document.querySelectorAll('input'))
+  }
 </script>
 
 <InteriorHeader />
 
-<!-- extraPhotos is triggered when they add more photos to interior -->
-{#if $order.photos.interiorFiles.length > 0 && !$extraPhotos}
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-    {#each $order.photos.interiorFiles as photo}
-      <ImageCard>
-        <Image src={photo.href} slot="img" />
-        <div slot="content">
-          <Input label="What room is this?" />
-        </div>
-      </ImageCard>
-    {/each}
-  </div>
-{:else} <!-- No interior photos uploaded yet so show uppy -->
-  <div class="h-full flex justify-center">
-    <Dashboard
-      uppy={interiorUppy()}
-      props={{
+<form on:submit={submitOrder} >
+  <!-- extraPhotos is triggered when they add more photos to interior -->
+  {#if $order.photos.interiorFiles.length > 0 && !$extraPhotos}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+      {#each $order.photos.interiorFiles as photo}
+        <ImageCard>
+          <Image src={photo.href} slot="img" />
+          <div slot="content">
+            <Input label="What room is this?" />
+          </div>
+        </ImageCard>
+      {/each}
+    </div>
+  {:else} <!-- No interior photos uploaded yet so show uppy -->
+    <div class="h-full flex justify-center">
+      <Dashboard
+        uppy={interiorUppy()}
+        props={{
       inline: true,
       height: 300,
       proudlyDisplayPoweredByUppy: false,
       plugins: ['ImageEditor']
     }}
-    />
-  </div>
-{/if}
+      />
+    </div>
+  {/if}
 
+  <div class="m-4 flex justify-center">
+    <button  type="submit" class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-full"> Save Order </button>
+  </div>
+</form>
