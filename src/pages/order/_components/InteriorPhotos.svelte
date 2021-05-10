@@ -95,6 +95,6 @@
   {/if}
 
   <div class="m-4 flex justify-center">
-    <button  type="submit" class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-1/3"> Save Order </button>
+    <button type="submit" class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white  w-2/3 sm:w-1/3"> Save Order </button>
   </div>
 </form>
