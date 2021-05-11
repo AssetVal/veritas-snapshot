@@ -1,10 +1,7 @@
 {
-  "background_color": "#ffffff",
-  "theme_color": "#193d5c",
-  "name": "Veritas Snapshot",
+  "name": "AssetVal Snapshot",
   "short_name": "Snapshot",
-  "start_url": "/",
-  "display": "standalone",
+  "description": "Take pictures for your assignments out in the field!",
   "icons": [
     {
       "src": "/images/touch-icons/android-chrome-192x192.png",
@@ -17,5 +14,9 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ]
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#193d5c",
+  "display": "fullscreen"
 }
