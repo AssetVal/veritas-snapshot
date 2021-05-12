@@ -39,11 +39,19 @@
     <span class="mr-3 w-12 h-12 text-5xl relative inline-block align-middle">
       {#if $vendor.user.imgDef}
         <img class="rounded-full" alt="User Avatar" src="https://s3.us-west-1.amazonaws.com/veritasprofile/{$vendor.user._id}-profile.webp">
+      {:else}
+        {#if $vendor.user.gender === 'female'}
+          <img class="rounded-full" src="https://s3.us-west-1.amazonaws.com/assetvalphotos/assets/contacts/photo_awaited_female.webp"  alt="Awaiting User Avatar">
+        {:else if $vendor.user.gender === 'male'}
+          <img class="rounded-full" src="https://s3.us-west-1.amazonaws.com/assetvalphotos/assets/contacts/photo_awaited_male.webp"  alt="Awaiting User Avatar">
+        {:else}
+          <img class="rounded-full" src="https://s3.us-west-1.amazonaws.com/assetvalphotos/assets/rsz_noimage.webp"  alt="Awaiting User Avatar">
+        {/if}
       {/if}
     </span>
     <span class="mr-3 block text-left flex-1 overflow-hidden overflow-clip">
       <span class="text-lg block overflow-hidden overflow-ellipsis whitespace-nowrap font-semibold">
-        {$vendor.user.name.nickname} {$vendor.user.name.last}
+        {$vendor.user.name.nickname}'s Account
       </span>
       <span class="block overflow-hidden overflow-ellipsis whitespace-nowrap description">
         {$vendor.user.desc}
