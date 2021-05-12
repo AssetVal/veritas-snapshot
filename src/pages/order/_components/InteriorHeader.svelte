@@ -24,7 +24,7 @@
 <div class="flex f-row">
   <header class="mt-3 mb-1 p-0 block flex items-center">
     <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2"> Interior Photos </h1>
-    {#if $order.photos.interiorFiles.filter(files => files.note !== null).length === $order.photos.interiorFiles.length && $extraPhotos === false}
+    {#if $order.photos.interiorFiles.length !== 0 && $order.photos.interiorFiles.filter(files => files.note !== null).length === $order.photos.interiorFiles.length && $extraPhotos === false}
       <CheckmarkIcon height="2rem" width="2rem" classes="text-green-600 mb-2 ml-2" />
     {/if}
   </header>
