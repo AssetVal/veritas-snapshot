@@ -7,6 +7,7 @@
   import {vendor} from '../../../stores/vendor';
   import {SvelteToast} from '@zerodevx/svelte-toast';
   import Header from '../../../components/layout/Header.svelte';
+  import abbreviateState from '../../_modules/stateAbbreviations';
   import Sidebar from '../../../components/layout/Sidebar.svelte';
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
@@ -36,7 +37,7 @@
         {/if}
         {#if $order.address.city}
           <small class="text-lg text-white">
-            {$order.address.city}, {$order.address.state}, {$order.address.zip}
+            {$order.address.city}, {abbreviateState($order.address.state)}, {$order.address.zip}
           </small>
         {/if}
       </div>
