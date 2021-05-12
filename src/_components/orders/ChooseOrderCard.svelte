@@ -68,7 +68,7 @@
       </div>
     </div>
     <span class="text-sm text-coolGray-400">Client Instructions:</span>
-    <p>{order.notes}</p>
+    <p>{@html order.notes}</p>
   </div>
 
   <div slot="footer" class="flex items-stretch footer">
