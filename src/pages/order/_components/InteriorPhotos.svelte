@@ -87,6 +87,7 @@
         props={{
       inline: true,
       height: 300,
+      width: window.innerWidth - (10),
       proudlyDisplayPoweredByUppy: false,
       plugins: ['ImageEditor']
     }}
