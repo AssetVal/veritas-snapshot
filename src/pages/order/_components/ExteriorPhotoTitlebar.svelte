@@ -36,7 +36,7 @@
     {:else}
       <div class="ml-auto pr-1 flex items-center cursor-pointer" on:click={() => {
           Swal.fire({ title: category.text, text: category.hint, icon: 'info'})
-        }}>
+      }}>
         <HelpIcon classes="h-5 w-5"/>
       </div>
     {/if}

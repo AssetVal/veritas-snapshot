@@ -4,8 +4,6 @@
   import ExteriorPhotos from './_components/ExteriorPhotos.svelte';
   import InteriorPhotos from './_components/InteriorPhotos.svelte';
 
-  console.log('order', $order);
-
   setTimeout(changeUppyTheme, 180);
   window.onresize = changeUppyTheme;
 </script>

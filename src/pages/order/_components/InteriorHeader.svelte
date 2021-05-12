@@ -1,5 +1,6 @@
 <script>
   import NarrowBackIcon from '../../../../components/icons/NarrowBackIcon.svelte';
+  import CheckmarkIcon from '../../../../components/icons/CheckmarkIcon.svelte';
   import TrashIcon from '../../../../components/icons/TrashIcon.svelte';
   import PlusIcon from '../../../../components/icons/PlusIcon.svelte';
   import clearPhotosFolder from '../../../_modules/clearPhotoFolder';
@@ -18,13 +19,14 @@
       });
     }
   };
-
-
 </script>
 
 <div class="flex f-row">
-  <header class="mt-3 mb-1 p-0 block">
+  <header class="mt-3 mb-1 p-0 block flex items-center">
     <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2"> Interior Photos </h1>
+    {#if $order.photos.interiorFiles.filter(files => files.note !== null).length === $order.photos.interiorFiles.length && $extraPhotos === false}
+      <CheckmarkIcon height="2rem" width="2rem" classes="text-green-600 mb-2 ml-2" />
+    {/if}
   </header>
   <div class="ml-auto flex items-center">
     {#if $order.photos.interiorFiles.length > 0 && !$extraPhotos}
