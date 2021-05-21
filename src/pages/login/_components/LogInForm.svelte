@@ -15,9 +15,13 @@
       if (response.status === 'success'){
         $vendor = {...response.data};
 
-        /** We want to $goto our current location.
-         *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
-        $goto(window.location.href);
+        if (window.location.pathname === '/login'){
+          $goto('../');
+        } else {
+          /** We want to $goto our current location.
+           *  Since we're now logged in, we shouldn't be redirected to this login page again. **/
+          $goto(window.location.href);
+        }
       } else {
         toast.push(response.message)
       }
