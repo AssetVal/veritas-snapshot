@@ -12,7 +12,23 @@ declare type Updater<T> = (value: T) => T;
  * @param initialValue
  */
 export default function persistentWritable<T>(key: string, initialValue: T): Writable<T> {
-  const store: Writable<T> = writable(initialValue);
+  const store = writable(initialValue, (set) => {
+    const browser = typeof(localStorage) !== 'undefined';
+    const json = browser ? localStorage.getItem(key) : null;
+
+    if (json) set(<T> JSON.parse(json));
+
+    if (browser) { // Handle multiple tabs open
+      const handleStorage = (event: StorageEvent) => {
+        if (event.key === key) set(event.newValue ? JSON.parse(event.newValue) : null)
+      }
+
+      window.addEventListener('storage', handleStorage)
+
+      return () => window.removeEventListener('storage', handleStorage)
+    }
+  })
+
   const {subscribe, set} = store;
   const json: string = typeof(localStorage) != 'undefined' ? localStorage.getItem(key) : null;
 
