@@ -1,3 +1,5 @@
+import type Order from '../../classes/Order';
+
 /**
  * | Prop | Value |
  * |----|----|
@@ -8,7 +10,7 @@
 export interface fetchResult {
   status: 'success' | 'failure' | 'error'
   message: string,
-  data?: any,
+  data?: Order,
 }
 
 /**
