@@ -36,14 +36,13 @@
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     // Create a new Uppy instance
     const uppy = uppyInstance(1, $order, category);
+
     // If they open the photo editor, expand our editor modal
-    uppy.on('file-editor:start', () => {
-      editorExpanded.update(n => n = true);
-    });
+    uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
+
     // When they finish or close editing, close the editor modal
-    uppy.on('file-editor:complete', () => {
-      editorExpanded.update(n => n = false);
-    });
+    uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false); });
+
     // On finish upload look for success
     uppy.on('complete', async (result): Promise<void> => {
       if (result.successful.length > 0) {
@@ -52,8 +51,10 @@
 
         toastResults(status, message, () => {
           $order = data;
-          $vendor.orders.inProgress = [...$vendor.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+          $vendor.orders.inProgress = [...$vendor.orders.inProgress.filter((order: Order) => order._id !== data._id), $order];
         });
+      } else {
+        console.log(result)
       }
     });
     return uppy;

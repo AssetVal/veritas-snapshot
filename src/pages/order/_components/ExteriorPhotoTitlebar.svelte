@@ -19,7 +19,7 @@
 
       toastResults(status, message, () => {
         $order = data;
-        $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
+        $vendor?.orders.inProgress = [...$vendor?.orders.inProgress.filter((order: Order) => order._id !== data._id), $order];
       });
     }
   };
