@@ -25,6 +25,7 @@ export declare interface iOrder {
     exteriorFiles?: Array<{
       href?: string,
       name: string,
+      note?: string,
       category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum' | photoCategoryIDs
     }>,
     interiorFiles?: Array<{
@@ -228,6 +229,7 @@ export class Order implements iOrder {
       href?: string,
       _id?: string;
       name: string,
+      note?: string,
       category: 'frontView'|'frontAngledView'|'streetView'|'addressVerification'|'dwellingRear'|'dwellingRight'|'dwellingLeft'|'backyard'|'addendum'| photoCategoryIDs
     }>,
     interiorFiles?: Array<{
