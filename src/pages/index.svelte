@@ -20,7 +20,7 @@
     {/each}
   {:else}
     <Card>
-      <h3>No orders in progress</h3>
+      <h3 slot="body">No orders currently in progress</h3>
     </Card>
   {/if}
 </Wrapper>
