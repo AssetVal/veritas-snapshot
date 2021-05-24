@@ -3,6 +3,7 @@ import XHRUpload from '@uppy/xhr-upload';
 import ImageEditor from '@uppy/image-editor';
 import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
 import type Order from '../../../../classes/Order';
+import Webcam from '@uppy/webcam';
 
 let uppyInstanceCount: number = 0;
 
@@ -46,6 +47,14 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
       maxNumberOfFiles: maxPhotos,
       allowedFileTypes: ['image/*']
     }});
+
+  uppy.use(Webcam, {
+    modes: ['picture'],
+    mirror: false,
+    videoConstraints: {
+      facingMode: 'environment'
+    }
+  })
 
   uppy.use(XHRUpload, {
     endpoint: `https://www.assetval.club/api/snapshotUpload/${order._id}/${intExt}/${imageCategory}`,

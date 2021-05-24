@@ -35,7 +35,7 @@
 
   const exteriorPhotosUppyInstance = (category: photoCategoryIDs) => {
     // Create a new Uppy instance
-    const uppy = uppyInstance(1, $order, category);
+    const uppy = uppyInstance((category === 'exterior') ? 200 : 1, $order, category);
 
     // If they open the photo editor, expand our editor modal
     uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
