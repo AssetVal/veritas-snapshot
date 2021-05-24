@@ -1,7 +1,7 @@
 <script lang="ts">
   export let height = '1rem';
   export let width = '1rem';
-  export let classes = false;
+  export let classes: string;
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" height={height} width={width} class={classes}>
