@@ -5,7 +5,7 @@
     exteriorPhotoCategoriesForInteriorOrders,
     optionalPhotoCategories,
   } from '../_data/exteriorPhotoCategories';
-  import Order from '../../../../classes/Order';
+  import type Order from '../../../../classes/Order';
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
   import * as ImageEditor from '@uppy/image-editor';
@@ -16,6 +16,7 @@
   import Image from '../../../../components/layout/Image.svelte';
   import ExteriorPhotoTitlebar from './ExteriorPhotoTitlebar.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
+  import type { APIResponse } from '../../../_modules/APIResponse';
 
   let photoCategories = exteriorPhotoCategories;
 
@@ -47,7 +48,7 @@
     uppy.on('complete', async (result): Promise<void> => {
       if (result.successful.length > 0) {
         const exteriorPhoto = result.successful[0];
-        const {status, message, data} = exteriorPhoto.response.body;
+        const {status, message, data} = exteriorPhoto.response.body as APIResponse;
 
         toastResults(status, message, () => {
           $order = data;
