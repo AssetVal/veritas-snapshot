@@ -6,41 +6,15 @@ import Webcam from '@uppy/webcam';
 import Uppy from '@uppy/core';
 
 let uppyInstanceCount: number = 0;
-
 const incrementInterior = () => uppyInstanceCount++
 
 export default function uppyInstance(maxPhotos: number, order: Order, imageCategory: photoCategoryIDs|'None' = 'None'): Uppy.Uppy<Uppy.StrictTypes> {
-  const intExt: string = (maxPhotos > 1) ? 'interior' : 'exterior';
+  const intExt: string = (maxPhotos > 1 && imageCategory !== 'exterior') ? 'interior' : 'exterior';
 
   const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
     autoProceed: false,
     // Create separate ID's so Uppy can use local storage easier
     id: (imageCategory === 'None') ? `InteriorPhotos${incrementInterior()}` : imageCategory,
-    // @ts-ignore - Uppy's "Strict Typescript" mode doesn't like me setting new metadata this way (but it works)
-    onBeforeFileAdded(currentFile) {
-      if (currentFile.name.length > 5 && imageCategory !== 'None'){ // Return a new object, so we don't mutate the original
-        return { // Reduce file name, so the mobile phone users can easily see the edit button
-          ...currentFile,
-          meta: {
-            originalName: currentFile.name,
-          },
-          name: imageCategory,
-        }
-      } else {
-        return currentFile;
-      }
-    },
-    onBeforeUpload(files){
-      if (imageCategory === 'None') return files;
-      const updatedFiles = {}
-      Object.keys(files).forEach(fileID => {
-        updatedFiles[fileID] = {
-          ...files[fileID], // @ts-ignore
-          name: files[fileID].meta.originalName,
-        }
-      })
-      return updatedFiles
-    },
     restrictions: {
       maxFileSize: 100000000,
       maxNumberOfFiles: maxPhotos,
