@@ -85,12 +85,12 @@
       <Dashboard
         uppy={interiorUppy()}
         props={{
-      inline: true,
-      height: 300,
-      width: window.innerWidth - (10),
-      proudlyDisplayPoweredByUppy: false,
-      plugins: ['ImageEditor']
-    }}
+          inline: true,
+          height: 300,
+          width: window.innerWidth - (10),
+          proudlyDisplayPoweredByUppy: false,
+          plugins: ['ImageEditor']
+        }}
       />
     </div>
   {/if}

@@ -12,10 +12,12 @@
   import ExteriorHeader from './ExteriorHeader.svelte';
   import editorExpanded from '../../../../stores/editor';
   import toastResults from '../../../_modules/toastResults';
+  import Input from '../../../_components/layout/Input.svelte';
   import Image from '../../../../components/layout/Image.svelte';
   import ExteriorPhotoTitlebar from './ExteriorPhotoTitlebar.svelte';
   import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
   import type { APIResponse } from '../../../_modules/APIResponse';
+  import ImageCard from '../../../../components/layout/ImageCard.svelte';
 
   let photoCategories = exteriorPhotoCategories;
 
@@ -66,8 +68,17 @@
   {#each photoCategories as category, index}
     <div class="h-2/3">
       <ExteriorPhotoTitlebar {category} />
-      {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
+      {#if $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0 && category.id !== 'exterior'}
         <Image src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].href} alt="{category.text}"/>
+      {:else if $order.photos.exteriorFiles.filter(entry => entry.category === 'exterior').length > 0 && category.id === 'exterior'}
+        {#each $order.photos.exteriorFiles.filter(entry => entry.category === 'exterior') as photo}
+          <ImageCard>
+            <Image src={photo.href} slot="img" />
+            <div slot="content">
+              <Input label="Notes / Details" id={photo.name} value={photo?.note ?? ''} />
+            </div>
+          </ImageCard>
+        {/each}
       {:else}
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
