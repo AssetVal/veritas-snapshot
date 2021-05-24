@@ -8,7 +8,6 @@
   import type Order from '../../../../classes/Order';
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
-  import * as ImageEditor from '@uppy/image-editor';
   import uppyInstance from '../_modules/uppyFactory';
   import ExteriorHeader from './ExteriorHeader.svelte';
   import editorExpanded from '../../../../stores/editor';
