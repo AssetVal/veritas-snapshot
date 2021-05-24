@@ -1,12 +1,11 @@
-import Uppy from '@uppy/core';
-import XHRUpload from '@uppy/xhr-upload';
-import ImageEditor from '@uppy/image-editor';
 import type {photoCategoryIDs} from '../_data/exteriorPhotoCategories';
 import type Order from '../../../../classes/Order';
+import ImageEditor from '@uppy/image-editor';
+import XHRUpload from '@uppy/xhr-upload';
 import Webcam from '@uppy/webcam';
+import Uppy from '@uppy/core';
 
 let uppyInstanceCount: number = 0;
-
 
 const incrementInterior = () => uppyInstanceCount++
 
@@ -17,7 +16,7 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
     autoProceed: false,
     // Create separate ID's so Uppy can use local storage easier
     id: (imageCategory === 'None') ? `InteriorPhotos${incrementInterior()}` : imageCategory,
-    // @ts-ignore - Uppys "Strict Typescript" mode doesn't like me setting new metadata this way (but it works)
+    // @ts-ignore - Uppy's "Strict Typescript" mode doesn't like me setting new metadata this way (but it works)
     onBeforeFileAdded(currentFile) {
       if (currentFile.name.length > 5 && imageCategory !== 'None'){ // Return a new object, so we don't mutate the original
         return { // Reduce file name, so the mobile phone users can easily see the edit button
