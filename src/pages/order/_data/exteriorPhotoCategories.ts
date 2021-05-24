@@ -1,19 +1,19 @@
 export type photoCategoryIDs = 'frontView'
-                            | 'frontAngledView'
-                            | 'frontViewLeft'
-                            | 'frontViewRight'
-                            | 'streetView'
-                            | 'oppositeStreetView'
-                            | 'addressVerification'
-                            | 'exterior'
-                            | 'leftSideOfDwelling'
-                            | 'rightSideOfDwelling'
-                            | 'rearOfDwelling'
-                            | 'backyard'
-                            | 'roof'
-                            | 'exteriorPaint'
-                            | 'viewsAndScenery'
-                            | 'neighborhoodInfluences'
+                             | 'frontAngledView'
+                             | 'frontViewLeft'
+                             | 'frontViewRight'
+                             | 'streetView'
+                             | 'oppositeStreetView'
+                             | 'addressVerification'
+                             | 'exterior'
+                             | 'leftSideOfDwelling'
+                             | 'rightSideOfDwelling'
+                             | 'rearOfDwelling'
+                             | 'backyard'
+                             | 'roof'
+                             | 'exteriorPaint'
+                             | 'viewsAndScenery'
+                             | 'neighborhoodInfluences'
 
 export const exteriorPhotoCategories: Array<{ text: string; id: photoCategoryIDs; required: boolean, hint: string, order: number }> = [
   {
@@ -55,7 +55,8 @@ export const exteriorPhotoCategories: Array<{ text: string; id: photoCategoryIDs
     text: 'Opposite Street View',
     id: 'oppositeStreetView',
     required: true,
-    hint: 'While standing in front of the subject property, take a photo looking down the opposite direction of the street from that of the Street View photo, ensuring a good view of the nearby dwellings.',
+    hint: `While standing in front of the subject property,
+     take a photo looking down the opposite direction of the street from that of the Street View photo, ensuring a good view of the nearby dwellings.`,
     order: 6
   },
   {
@@ -81,21 +82,24 @@ export const exteriorPhotoCategoriesForInteriorOrders: Array<{ text: string; id:
     text: 'Left Side of Dwelling',
     id: 'leftSideOfDwelling',
     required: true,
-    hint: 'Take a photo of the full left side of the dwelling.  The most helpful photo would be shot at an angle so that a portion of the rear of the dwelling was visible in the photo along with the full left side of the dwelling.',
+    hint: `Take a photo of the full left side of the dwelling.
+    The most helpful photo would be shot at an angle so that a portion of the rear of the dwelling was visible in the photo along with the full left side of the dwelling.`,
     order: 7
   },
   {
     text: 'Right Side of Dwelling',
     id: 'rightSideOfDwelling',
     required: true,
-    hint: 'Take a photo of the full right side of the dwelling.  The most helpful photo would be shot at an angle so that a portion of the rear of the dwelling was visible in the photo along with the full right side of the dwelling.',
+    hint: `Take a photo of the full right side of the dwelling.
+    The most helpful photo would be shot at an angle so that a portion of the rear of the dwelling was visible in the photo along with the full right side of the dwelling.`,
     order: 8
   },
   {
     text: 'Rear of Dwelling',
     id: 'rearOfDwelling',
     required: true,
-    hint: 'From the farthest point from the rear of the dwelling, while in the backyard, take a photo of the rear of the subject property.  Be sure to the entire rear of the dwelling can be seen in the photo. ',
+    hint: `From the farthest point from the rear of the dwelling, while in the backyard, take a photo of the rear of the subject property.
+    Be sure to the entire rear of the dwelling can be seen in the photo. `,
     order: 9
   },
   {
