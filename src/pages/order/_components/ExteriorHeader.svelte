@@ -6,11 +6,12 @@
   import confirmChoice from '../../../_modules/confirmationDialoge';
   import postToVeritas from '../../../_modules/postToVeritas';
   import toastResults from '../../../_modules/toastResults';
+  import type Order from '../../../../classes/Order';
   import {vendor} from '../../../../stores/vendor';
   import {order} from '../../../../stores/order';
-  import Order from '../../../../classes/Order';
-
-  export let categories;
+  import type { photoCategoryIDs } from '../_data/exteriorPhotoCategories';
+  
+  export let categories: Array<{ text: string; id: photoCategoryIDs; required: boolean, hint: string, order: number }>;
 
   const clearExteriorPhotos = async () => {
     const choice = await confirmChoice('Yes, delete all exterior photos!');

@@ -1,7 +1,7 @@
 <script lang="ts">
   import {goto} from '@roxi/routify';
   import {params} from '@roxi/routify';
-  import Order from '../../../classes/Order';
+  import type Order from '../../../classes/Order';
   import {order} from '../../../stores/order';
   import {vendor} from '../../../stores/vendor';
   import {SvelteToast} from '@zerodevx/svelte-toast';
@@ -11,7 +11,7 @@
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
 
-  $: if ($vendor._id === 'noUser') $goto('../login');
+  $: if ($vendor._id === 'noUser'){ $goto('../login') };
   $: if ($vendor._id !== 'noUser') $order = $vendor.orders.inProgress.filter((order: Order) => order._id === $params._id)[0];
 
   let sidebarOpen = false;

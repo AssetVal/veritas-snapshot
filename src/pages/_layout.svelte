@@ -6,7 +6,7 @@
 
   let sidebarOpen = false;
 
-  $: if ($vendor._id === 'noUser') $goto("./login", {}, true);
+  $: if ($vendor._id === 'noUser'){ $goto("./login", {}, true); }
 </script>
 
 {#if $vendor._id !== 'noUser'}

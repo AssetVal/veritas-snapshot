@@ -1,6 +1,6 @@
 <script lang="ts">
   import {Dashboard} from '@uppy/svelte';
-  import Order from '../../../../classes/Order';
+  import type Order from '../../../../classes/Order';
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
   import uppyInstance from '../_modules/uppyFactory';
@@ -12,24 +12,24 @@
   import Image from '../../../../components/layout/Image.svelte';
   import ImageCard from '../../../../components/layout/ImageCard.svelte';
   import postToVeritas from '../../../_modules/postToVeritas';
+  import type { APIResponse } from '../../../_modules/APIResponse';
 
   const interiorUppy = () => {
     // Create a new Uppy instance
     const uppy = uppyInstance(50, $order);
+
     // If they open the photo editor, expand our editor modal
-    uppy.on('file-editor:start', () => {
-      editorExpanded.update(n => n = true);
-    });
+    uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
+
     // When they finish or close editing, close the editor modal
-    uppy.on('file-editor:complete', () => {
-      editorExpanded.update(n => n = false);
-    });
+    uppy.on('file-editor:complete', () => { editorExpanded.update(n => n = false); });
+    
     // On finish upload look for success
     uppy.on('complete', async (result): Promise<void> => {
       if (result.successful.length > 0) {
         extraPhotos.update(n => n = false)
         const interiorPhotos = result.successful;
-        const {status, message, data} = interiorPhotos[interiorPhotos.length - 1].response.body;
+        const {status, message, data} = interiorPhotos[interiorPhotos.length - 1].response.body as APIResponse;
 
         toastResults(status, message, () => {
           $order = data;
