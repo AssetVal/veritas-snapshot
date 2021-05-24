@@ -9,7 +9,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   plugins: [
-    ({ addUtilities, e, theme, variants }) => {
+    ({ addUtilities, theme, variants }) => {
       let colors = flattenColorPalette(theme('borderColor'));
       delete colors['default'];
 

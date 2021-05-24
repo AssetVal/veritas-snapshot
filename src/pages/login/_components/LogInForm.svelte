@@ -30,8 +30,6 @@
 </script>
 
 <style>
-  .mw-420 { min-width: 420px; }
-
   label {
     display: block;
     position: absolute;
@@ -51,8 +49,8 @@
   }
 </style>
 
-<form class="pt-12 px-8 pb-4 rounded bg-white shadow relative mw-420" on:submit={login}>
-  <div class="m-4 relative">
+<form class="pt-12 px-4 pb-4 rounded bg-white shadow relative w-full xs:w-screen sm:w-11/12 md:w-5/6" on:submit={login}>
+  <div class="mx-4 relative">
     <input
       required
       id="email"
