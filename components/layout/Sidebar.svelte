@@ -8,7 +8,7 @@
   import Vendor from '../../classes/Vendor';
 
   export let open = false;
-  let classes;
+  let classes: string;
 
   $: (open) ? (classes = 'sidebar show') : (classes = 'sidebar')
 
