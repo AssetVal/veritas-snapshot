@@ -24,12 +24,12 @@
 </style>
 
 <header class="app-header">
-  <div class="w-auto px-2 bg-blue-primary-dark flex items-center hidden md:flex lg:flex xl:flex 2xl:flex">
+  <div class="w-auto px-2 bg-blue-primary-dark items-center hidden sm:flex md:flex lg:flex xl:flex 2xl:flex">
     <Hamburger bind:open={sidebar}/>
     <Logo />
   </div>
   <div class="flex flex-1 items-center bg-blue-header">
-    <div class="flex items-center px-2 md:hidden lg:hidden xl:hidden 2xl:hidden">
+    <div class="flex items-center px-2 sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
       <Hamburger bind:open={sidebar}/>
     </div>
     {#if $$slots.infoArea}
