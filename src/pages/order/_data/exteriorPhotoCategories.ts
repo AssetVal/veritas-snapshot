@@ -5,7 +5,7 @@ export type photoCategoryIDs = 'frontView'
                              | 'streetView'
                              | 'oppositeStreetView'
                              | 'addressVerification'
-                             | 'exterior'
+                             | 'addendum'
                              | 'leftSideOfDwelling'
                              | 'rightSideOfDwelling'
                              | 'rearOfDwelling'
@@ -70,7 +70,7 @@ export const exteriorPhotoCategories: Array<{ text: string; id: photoCategoryIDs
   },
   {
     text: 'Exterior',
-    id: 'exterior',
+    id: 'addendum',
     required: false,
     hint: 'Take as many photos as necessary so as to provide evidence of the subject property’s condition as well as any functional obsolescence such as railroad tracks, power lines, etc.',
     order: 12

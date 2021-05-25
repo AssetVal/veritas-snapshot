@@ -6,11 +6,11 @@
   import toastResults from '../../../_modules/toastResults';
   import clearImage from '../../../_modules/clearImage';
   import type Order from '../../../../classes/Order';
-  import {vendor} from '../../../../stores/vendor';
-  import {order} from '../../../../stores/order';
+  import { vendor } from '../../../../stores/vendor';
+  import { order } from '../../../../stores/order';
   import Swal from 'sweetalert2';
   
-  export let category;
+  export let category: { text: any; id: any; hint?: any; };
 
   const clearPhoto = async (category: { id: string, text: string }) => {
     const choice = await confirmChoice(`Yes, delete the ${category.text}`);

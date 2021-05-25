@@ -3,7 +3,7 @@
   import type Order from '../../../../classes/Order';
   import {order} from '../../../../stores/order';
   import {vendor} from '../../../../stores/vendor';
-  import uppyInstance from '../_modules/uppyFactory';
+  import {interiorUppyInstance} from '../_modules/uppyFactory';
   import InteriorHeader from './InteriorHeader.svelte';
   import editorExpanded from '../../../../stores/editor';
   import extraPhotos from '../../../../stores/extraPhotos';
@@ -16,7 +16,7 @@
 
   const interiorUppy = () => {
     // Create a new Uppy instance
-    const uppy = uppyInstance(50, $order);
+    const uppy = interiorUppyInstance($order);
 
     // If they open the photo editor, expand our editor modal
     uppy.on('file-editor:start', () => { editorExpanded.update(n => n = true); });
