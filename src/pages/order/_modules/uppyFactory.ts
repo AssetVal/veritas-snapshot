@@ -4,17 +4,13 @@ import ImageEditor from '@uppy/image-editor';
 import XHRUpload from '@uppy/xhr-upload';
 import Webcam from '@uppy/webcam';
 import Uppy from '@uppy/core';
+import {v4 as uuid} from 'uuid'
 
-let uppyInstanceCount: number = 0;
-const incrementInterior = () => uppyInstanceCount++
-
-export default function uppyInstance(maxPhotos: number, order: Order, imageCategory: photoCategoryIDs|'None' = 'None'): Uppy.Uppy<Uppy.StrictTypes> {
-  const intExt: string = (maxPhotos > 1 && imageCategory !== 'exterior') ? 'interior' : 'exterior';
-
+const createUppyInstance = (maxPhotos: number, url: string) => {
   const uppy: Uppy.Uppy<Uppy.StrictTypes> = Uppy<Uppy.StrictTypes>({
     autoProceed: false,
     // Create separate ID's so Uppy can use local storage easier
-    id: (imageCategory === 'None') ? `InteriorPhotos${incrementInterior()}` : imageCategory,
+    id: uuid(),
     restrictions: {
       maxFileSize: 100000000,
       maxNumberOfFiles: maxPhotos,
@@ -30,7 +26,7 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
   })
 
   uppy.use(XHRUpload, {
-    endpoint: `https://www.assetval.club/api/snapshotUpload/${order._id}/${intExt}/${imageCategory}`,
+    endpoint: `https://www.assetval.club/api/${url}`,
     formData: true,
     fieldName: 'files',
     bundle: true,
@@ -53,3 +49,6 @@ export default function uppyInstance(maxPhotos: number, order: Order, imageCateg
 
   return uppy;
 }
+
+export const exteriorUppyInstance = (order: Order, category: photoCategoryIDs) => createUppyInstance((category === 'addendum') ? 200 : 1, `snapshotExteriorUpload/${order._id}/${category}`);
+export const interiorUppyInstance = (order: Order) => createUppyInstance(200, `snapshotInteriorUpload/${order._id}`);
