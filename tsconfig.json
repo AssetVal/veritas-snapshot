@@ -1,5 +1,8 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2019",
+  },
   "include": ["src/**/*", "classes/**/*", "components/**/*", "stores/**/*"],
   "exclude": ["node_modules/*", "api/*", "assets/*"],
 }
