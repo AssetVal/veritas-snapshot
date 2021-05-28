@@ -3,6 +3,7 @@
   export let id = uuid();
   export let value = '';
   export let label = '';
+  export let set = 'interior';
 </script>
 
 <style>
@@ -50,6 +51,8 @@
     id={id}
     type="text"
     class="focus:outline-none focus:black-plum label-animate placeholder-transparent focus:border-b-blue-secondary"
-    value={value}>
+    value={value}
+    data-set={set}
+  >
   <label class="label" for={id}>{label}</label>
 </div>
