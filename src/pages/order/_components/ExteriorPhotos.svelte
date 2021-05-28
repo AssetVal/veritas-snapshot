@@ -76,7 +76,7 @@
           <ImageCard>
             <Image src={photo.href} slot="img" />
             <div slot="content">
-              <Input label="Notes / Details" id={photo.name} value={photo?.note ?? ''} />
+              <Input label="Notes / Details" id={photo.name} value={photo?.note ?? ''} set="exterior"/>
             </div>
           </ImageCard>
         {/each}
