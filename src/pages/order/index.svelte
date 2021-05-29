@@ -11,33 +11,36 @@
   setTimeout(changeUppyTheme, 180);
   window.onresize = changeUppyTheme;
 
+  type OrderSaveBody = {
+    _id: string,
+    exteriorPhotos?: Array<{name: string, note: string}>,
+    interiorPhotos?: Array<{name: string, note: string}>,
+  }
+
   const submitOrder = async(event) => {
     event.preventDefault();
+
     // Convert Node-List to Array
-    const interiorInputs = [...event.currentTarget.querySelectorAll('input[data-set="interior"]')];
-    const interiorValues = interiorInputs.map((input: HTMLInputElement) => [input.id, input.value]);
-    const interiorPhotos = $order.photos.interiorFiles.map(file => ({
-      note: interiorValues.filter(valuePair => valuePair[0] === file.name)[0][1],
-      name: file.name,
-    }));
-
     const exteriorInputs = [...event.currentTarget.querySelectorAll('input[data-set="exterior"]')];
-    const exteriorValues = exteriorInputs.map((input: HTMLInputElement) => [input.id, input.value]);
+    const interiorInputs = [...event.currentTarget.querySelectorAll('input[data-set="interior"]')];
 
-    console.log(interiorPhotos, exteriorValues);
+    // Map the values into formatted objects
+    const exteriorValues = exteriorInputs.map((input: HTMLInputElement) => ({name: input.id, note: input.value}));
+    const interiorValues = interiorInputs.map((input: HTMLInputElement) => ({name: input.id, note: input.value}));
 
-    /*
-    const {message, status, data} = await postToVeritas('snapshotInteriorSave', {
-      interiorFiles: JSON.stringify(interiorPhotos),
-      vendorID: $vendor._id,
-      orderID: $order._id
-    });
+    const orderSaveBody: OrderSaveBody = {_id: $order._id};
+
+    if (exteriorValues.length > 0) orderSaveBody.exteriorPhotos = exteriorValues;
+    if (interiorValues.length > 0) orderSaveBody.interiorPhotos = interiorValues;
+
+    const {message, status, data} = await postToVeritas('snapshotSaveNotes', {order: orderSaveBody, vendor: $vendor._id});
 
     toastResults(status, message, () => {
+      // Reassign the order with the response from Veritas to trigger updates
       $order = data;
+      // Store those results on the vendor for later
       $vendor.orders.inProgress = [...$vendor.orders.inProgress.filter((order: Order) => order._id !== order._id), $order];
     });
-    */
   }
 </script>
 
