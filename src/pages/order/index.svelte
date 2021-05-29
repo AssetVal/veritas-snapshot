@@ -3,10 +3,10 @@
   import changeUppyTheme from './_modules/changeUppyTheme';
   import ExteriorPhotos from './_components/ExteriorPhotos.svelte';
   import InteriorPhotos from './_components/InteriorPhotos.svelte';
-  import postToVeritas from '../../_modules/postToVeritas';
   import toastResults from '../../_modules/toastResults';
   import type Order from '../../../classes/Order';
   import {vendor} from '../../../stores/vendor';
+  import jsonToVeritas from '../../_modules/jsonToVeritas';
   
   setTimeout(changeUppyTheme, 180);
   window.onresize = changeUppyTheme;
@@ -33,7 +33,7 @@
     if (exteriorValues.length > 0) orderSaveBody.exteriorPhotos = exteriorValues;
     if (interiorValues.length > 0) orderSaveBody.interiorPhotos = interiorValues;
 
-    const {message, status, data} = await postToVeritas('snapshotSaveNotes', {order: orderSaveBody, vendor: $vendor._id});
+    const {message, status, data} = await jsonToVeritas('snapshotSaveNotes', {order: orderSaveBody, vendor: $vendor._id});
 
     toastResults(status, message, () => {
       // Reassign the order with the response from Veritas to trigger updates
@@ -65,6 +65,8 @@
   {/if}
 
   <div class="m-4 flex justify-center">
-    <button type="submit" class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white  w-2/3 sm:w-1/3"> Save Order </button>
+    <button type="submit" class="h-11 py-2 px-4 rounded border-blue-650 bg-blue-primary text-white w-2/3 sm:w-1/3">
+      Save Order
+    </button>
   </div>
 </form>

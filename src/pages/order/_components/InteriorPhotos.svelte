@@ -47,13 +47,11 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
     {#each $order.photos.interiorFiles as photo}
       <ImageCard>
-        <Image src={photo.href} slot="img" />
+        <div slot="img">
+          <Image src={photo.href} />
+        </div>
         <div slot="content">
-          <Input
-            label="What room is this?"
-            id={photo.name}
-            value={photo.note}
-          />
+          <Input label="What room is this?" id={photo.name} value={photo.note} />
         </div>
       </ImageCard>
     {/each}

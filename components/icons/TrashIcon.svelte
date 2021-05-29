@@ -1,7 +1,7 @@
 <script lang="ts">
   export let height = '1rem';
   export let width = '1rem';
-  export let classes: string;
+  export let classes: string = '';
 </script>
 
 

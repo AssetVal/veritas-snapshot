@@ -25,12 +25,12 @@
   .label-animate:focus { outline: 0; }
 
   .label-animate:focus~label, .label-animate:not(:placeholder-shown)~label{
-    opacity: .75;
+    opacity: .80;
     transform: scale(.85) translateY(-.5rem) translateX(.15rem);
   }
 
   .label {
-    color: rgba(128, 127, 127, 0.8);
+    color: rgba(104, 104, 104, 0.8);
     position: absolute;
     top: 0;
     left: 0;

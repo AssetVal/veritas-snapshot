@@ -74,9 +74,11 @@
       {:else if category.id === 'addendum' && $order.photos.exteriorFiles.filter(entry => entry.category === 'addendum').length > 0}
         {#each $order.photos.exteriorFiles.filter(entry => entry.category === 'addendum') as photo}
           <ImageCard>
-            <Image src={photo.href} slot="img" />
+            <div slot="img">
+              <Image src={photo.href} />
+            </div>
             <div slot="content">
-              <Input label="Notes / Details" id={photo.name} value={photo?.note ?? ''} set="exterior"/>
+              <Input label="Notes / Details" id={photo.name} value={photo?.note ?? ''} set="exterior" />
             </div>
           </ImageCard>
         {/each}
