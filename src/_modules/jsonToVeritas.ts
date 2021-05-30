@@ -22,7 +22,7 @@ export default async function jsonToVeritas(route: string, body: any): Promise<f
   try {
 
     const response = await fetch(`https://www.assetval.club/api/${route}`, {
-      body,
+      body: JSON.stringify(body),
       method: 'POST',
       redirect: 'follow',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
