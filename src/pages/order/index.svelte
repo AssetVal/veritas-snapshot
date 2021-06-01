@@ -6,15 +6,16 @@
   import toastResults from '../../_modules/toastResults';
   import type Order from '../../../classes/Order';
   import {vendor} from '../../../stores/vendor';
-  import jsonToVeritas from '../../_modules/jsonToVeritas';
+  import postToVeritas from '../../_modules/postToVeritas';
   
   setTimeout(changeUppyTheme, 180);
   window.onresize = changeUppyTheme;
 
   type OrderSaveBody = {
-    _id: string,
-    exteriorPhotos?: Array<{name: string, note: string}>,
-    interiorPhotos?: Array<{name: string, note: string}>,
+    orderID: string,
+    vendorID: string,
+    exteriorFiles?: string,
+    interiorFiles?: string,
   }
 
   const submitOrder = async(event) => {
@@ -28,12 +29,13 @@
     const exteriorValues = exteriorInputs.map((input: HTMLInputElement) => ({name: input.id, note: input.value}));
     const interiorValues = interiorInputs.map((input: HTMLInputElement) => ({name: input.id, note: input.value}));
 
-    const orderSaveBody: OrderSaveBody = {_id: $order._id};
+    const orderSaveBody: OrderSaveBody = {orderID: $order._id, vendorID: $vendor._id};
 
-    if (exteriorValues.length > 0) orderSaveBody.exteriorPhotos = exteriorValues;
-    if (interiorValues.length > 0) orderSaveBody.interiorPhotos = interiorValues;
+    if (exteriorValues.length > 0) orderSaveBody.exteriorFiles = JSON.stringify(exteriorValues);
+    if (interiorValues.length > 0) orderSaveBody.interiorFiles = JSON.stringify(interiorValues);
 
-    const {message, status, data} = await jsonToVeritas('snapshotSaveNotes', {order: orderSaveBody, vendor: $vendor._id});
+    const {message, status, data} = await postToVeritas('snapshotSaveNotes', orderSaveBody);
+    console.log({data})
 
     toastResults(status, message, () => {
       // Reassign the order with the response from Veritas to trigger updates
