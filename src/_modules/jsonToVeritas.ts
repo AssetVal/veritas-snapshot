@@ -20,14 +20,19 @@ export interface fetchResult {
  */
 export default async function jsonToVeritas(route: string, body: any): Promise<fetchResult>{
   try {
-
     const response = await fetch(`https://www.assetval.club/api/${route}`, {
-      body: JSON.stringify(body),
       method: 'POST',
-      redirect: 'follow',
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(body)
     });
 
-    return await response.json();
+    if (response.ok){
+      return await response.json();
+    } else {
+      console.error({"HTTP-Error ": response.status})
+      throw await response.text();
+    }
   } catch (err) { console.error(err); }
 }
