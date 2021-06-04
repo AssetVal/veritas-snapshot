@@ -37,7 +37,7 @@
 </script>
 
 <div class="flex f-row">
-  <header class="mt-3 mb-1 p-0 block flex items-center">
+  <header class="mt-3 mb-1 p-0 flex items-center">
     <h1 class="mt-0 mr-auto text-3xl font-semibold mb-2"> Exterior Photos </h1>
     {#if $order.photos.exteriorFiles.length === categories.length}
       <CheckmarkIcon height="2rem" width="2rem" classes="text-green-600 mb-2 ml-2" />
