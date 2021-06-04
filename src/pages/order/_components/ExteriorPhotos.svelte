@@ -68,11 +68,12 @@
 <div class="h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
   {#each photoCategories as category}
     <div class="h-2/3">
-      <ExteriorPhotoTitlebar {category} />
       {#if category.id !== 'addendum' && $order.photos.exteriorFiles.filter(entry => entry.category === category.id).length > 0}
+        <ExteriorPhotoTitlebar {category} />
         <Image src={$order.photos.exteriorFiles.filter(entry => entry.category === category.id)[0].href} alt="{category.text}"/>
       {:else if category.id === 'addendum' && $order.photos.exteriorFiles.filter(entry => entry.category === 'addendum').length > 0}
         {#each $order.photos.exteriorFiles.filter(entry => entry.category === 'addendum') as photo}
+          <ExteriorPhotoTitlebar {category} name={photo.name} />
           <ImageCard>
             <div slot="img">
               <Image src={photo.href} />
@@ -83,6 +84,7 @@
           </ImageCard>
         {/each}
       {:else}
+        <ExteriorPhotoTitlebar {category} />
         <Dashboard
           uppy={exteriorPhotosUppyInstance(category.id)}
           props={{
