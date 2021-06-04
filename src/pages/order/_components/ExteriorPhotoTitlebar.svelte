@@ -13,7 +13,9 @@
   export let category: { text: any; id: any; hint?: any; };
 
   const clearPhoto = async (category: { id: string, text: string }) => {
-    const choice = await confirmChoice(`Yes, delete the ${category.text}`);
+    const choice = await confirmChoice((category.id === 'addendum')
+    ? `Yes, delete ALL the ${category.text} photos`
+    : `Yes, delete the ${category.text}`);
 
     if (choice.isConfirmed) {
       const {status, message, data} = await clearImage('exterior', $order, category.id) as APIResponse;
