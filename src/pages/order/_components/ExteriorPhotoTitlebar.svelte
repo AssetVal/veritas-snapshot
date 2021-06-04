@@ -9,16 +9,20 @@
   import { vendor } from '../../../../stores/vendor';
   import { order } from '../../../../stores/order';
   import Swal from 'sweetalert2';
+  import clearImageByName from '../../../_modules/clearImageByName';
   
   export let category: { text: any; id: any; hint?: any; };
+  export let name = '';
 
   const clearPhoto = async (category: { id: string, text: string }) => {
     const choice = await confirmChoice((category.id === 'addendum')
-    ? `Yes, delete ALL the ${category.text} photos`
-    : `Yes, delete the ${category.text}`);
+    ? `Yes, delete this photo`
+    : `Yes, delete the ${category.text} photo`);
 
     if (choice.isConfirmed) {
-      const {status, message, data} = await clearImage('exterior', $order, category.id) as APIResponse;
+      const {status, message, data} = (category.id === 'addendum') 
+      ? await clearImageByName('exterior', $order, name) as APIResponse
+      : await clearImage('exterior', $order, category.id) as APIResponse;
 
       toastResults(status, message, () => {
         $order = data;
