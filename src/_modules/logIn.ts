@@ -1,5 +1,4 @@
 import type Vendor from '../../classes/Vendor';
-import postToVeritas, {fetchResult} from './postToVeritas';
 
 /**
  * | Prop | Value |
