@@ -12,6 +12,7 @@
   import Image from "../../../../components/layout/Image.svelte";
   import ImageCard from "../../../../components/layout/ImageCard.svelte";
   import type { APIResponse } from "../../../_modules/APIResponse";
+import InteriorPhotoTitlebar from "./InteriorPhotoTitlebar.svelte";
 
   const interiorUppy = () => {
     // Create a new Uppy instance
@@ -46,6 +47,7 @@
 {#if $order.photos.interiorFiles.length > 0 && !$extraPhotos}
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
     {#each $order.photos.interiorFiles as photo}
+      <InteriorPhotoTitlebar name={photo.name} />
       <ImageCard>
         <div slot="img">
           <Image src={photo.href} />
