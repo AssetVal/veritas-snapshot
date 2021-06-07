@@ -6,7 +6,7 @@
   import {vendor} from '../../../stores/vendor';
   import {SvelteToast} from '@zerodevx/svelte-toast';
   import Header from '../../../components/layout/Header.svelte';
-  import abbreviateState from '../../_modules/stateAbbreviations';
+  import abbreviateState from '@assetval/state-switcher';
   import Sidebar from '../../../components/layout/Sidebar.svelte';
   import BackIcon from '../../../components/icons/BackIcon.svelte';
   import EditorModal from '../../../components/layout/EditorModal.svelte';
