@@ -1,11 +1,12 @@
-<h1 align="center">Welcome to veritas-snapshot 👋</h1>
+<h1 align="center">Veritas Snapshot</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-15.12.0-blue.svg" />
   <img src="https://img.shields.io/badge/npm-7.6.3-blue.svg" />
+  <img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?" />
 </p>
-
-> Quick photos uploaded while out in the field
+  
+A PWA for realtors to take picture while out in the field
 
 ## Prerequisites
 
