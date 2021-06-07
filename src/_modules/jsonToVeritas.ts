@@ -31,7 +31,7 @@ export default async function jsonToVeritas(route: string, body: any): Promise<f
     if (response.ok){
       return await response.json();
     } else {
-      console.error({"HTTP-Error ": response.status})
+      console.error({"HTTP-Error ": response.status});
       throw await response.text();
     }
   } catch (err) { console.error(err); }
