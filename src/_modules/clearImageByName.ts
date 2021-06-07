@@ -17,7 +17,7 @@ export interface fetchResult {
  *
  * @param intOrExt
  * @param order
- * @param category
+ * @param name
  */
 export default async function clearImageByName(intOrExt: 'interior'|'exterior', order: Order, name: string): Promise<fetchResult> {
   try {
