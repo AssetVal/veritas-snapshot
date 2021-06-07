@@ -72,6 +72,7 @@
       ]
    },
    "dependencies": {
+      "@assetval/state-switcher": "^1.0.0",
       "@uppy/core": "^1.18.0",
       "@uppy/image-editor": "^0.2.4",
       "@uppy/svelte": "^0.1.8",
