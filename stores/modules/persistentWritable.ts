@@ -15,7 +15,7 @@ const stores: StoreDict = {}
  * @param initialValue
  */
 export default function persistentWritable<T>(key: string, initialValue: T): Writable<T> {
-  const browser = typeof(localStorage) !== 'undefined';
+  const browser = typeof(localStorage) != 'undefined';
 
   function updateStorage(key: string, value: T): void {
     if (!browser) return;
@@ -39,7 +39,7 @@ export default function persistentWritable<T>(key: string, initialValue: T): Wri
     }
     })
 
-    const {subscribe, set} = store;
+    const { subscribe, set } = store;
 
     stores[key] = {
       set(value: T): void {

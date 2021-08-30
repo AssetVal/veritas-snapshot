@@ -113,7 +113,7 @@ export declare interface iOrder {
     commercialUnits?: number,
     mixedUseUnits?: number,
     garage?: {
-      type?: 'attached'|'detached'|'carport'|'none',
+      style?: 'attached'|'detached'|'carport'|'none',
       size?: number,
       parking?: 'driveway'|'assigned'|'offStreet'|'onStreet',
     },
@@ -331,7 +331,7 @@ export class Order implements iOrder {
     commercialUnits: number,
     mixedUseUnits: number,
     garage: {
-      type: 'attached'|'detached'|'carport'|'none',
+      style: 'attached'|'detached'|'carport'|'none',
       size: number,
       parking: 'driveway'|'assigned'|'offStreet'|'onStreet',
     },
@@ -423,7 +423,6 @@ export class Order implements iOrder {
   }>;
   public added: Date;
   public savedAt: Date;
-  private fetchLink: string;
   public client: any;
   public systemComments: Array<SystemOrderComment>;
   public analystComments: Array<AnalystOrderComment>;
@@ -522,7 +521,7 @@ export class Order implements iOrder {
         commercialUnits: orderData?.props?.commercialUnits ?? null,
         mixedUseUnits: orderData?.props?.mixedUseUnits ?? null,
         garage: {
-          type: orderData?.props?.garage?.type ?? null,
+          style: orderData?.props?.garage?.style ?? null,
           size: orderData?.props?.garage?.size ?? null,
           parking: orderData?.props?.garage?.parking ?? null,
         },
@@ -552,7 +551,6 @@ export class Order implements iOrder {
         taxValue: orderData?.history?.taxValue ?? null,
         taxesCurrent: orderData?.history?.taxesCurrent ?? null,
       };
-      this.fetchLink = '/wizard/autosave';
       this.propertyLocation = {
         locationType: orderData?.propertyLocation?.locationType ?? null,
         coordinates: orderData?.propertyLocation?.coordinates ?? null,

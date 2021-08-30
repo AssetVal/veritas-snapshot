@@ -1,5 +1,5 @@
 <script>
-  import {vendor} from '../../stores/vendor';
+  import { vendor } from '../../stores/vendor';
   export let sidebarOpen = false;
   let classes;
   $: (sidebarOpen) ? (classes = 'close-btn show') : (classes = 'close-btn')
