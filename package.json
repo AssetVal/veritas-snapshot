@@ -2,8 +2,8 @@
    "name": "veritas-snapshot",
    "version": "1.0.0",
    "engines": {
-      "node": "16.1.0",
-      "npm": "7.11.2"
+      "node": "16.4.2",
+      "npm": "7.20.0"
    },
    "@comments scripts": {
       "dev": "develop with blazing fast rebuilds",
